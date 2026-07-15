@@ -247,8 +247,8 @@ export default function CastellariLanding() {
 
       <div className="stats">
         <div className="wrap stats-inner">
-          <div className="stat"><div className="num mono">17</div><div className="cap">Anos de atuação</div></div>
-          <div className="stat"><div className="num mono">312</div><div className="cap">Imóveis negociados</div></div>
+          <div className="stat"><div className="num mono">1</div><div className="cap">Anos de atuação</div></div>
+          <div className="stat"><div className="num mono">3</div><div className="cap">Imóveis negociados</div></div>
           <div className="stat"><div className="num mono">R$ 2,8 bi</div><div className="cap">Em transações</div></div>
           <div className="stat"><div className="num mono">98%</div><div className="cap">Clientes por indicação</div></div>
         </div>
