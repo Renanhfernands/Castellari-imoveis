@@ -207,7 +207,7 @@ export default function CastellariLanding() {
       <section className="hero">
         <div className="wrap hero-grid">
           <div>
-            <div className="hero-eyebrow"><span className="rule"></span>CURADORIA IMOBILIÁRIA DESDE 2009</div>
+            <div className="hero-eyebrow"><span className="rule"></span>CURADORIA IMOBILIÁRIA DESDE 2026</div>
             <h1>Cada endereço,<br /><em>lavrado</em> com precisão.</h1>
             <p className="lead">A Castellari seleciona um portfólio restrito de imóveis de alto padrão. Cada propriedade é avaliada, medida e apresentada com o mesmo rigor de um projeto arquitetônico.</p>
             <div className="hero-actions">
@@ -373,8 +373,8 @@ export default function CastellariLanding() {
             <p>Preencha os campos ao lado e um de nossos consultores retorna o contato em até um dia útil.</p>
             <div className="contact-detail">
               <div><span>Telefone</span>+55 11 0000-0000</div>
-              <div><span>E-mail</span>contato@castellariimoveis.com.br</div>
-              <div><span>Endereço</span>Av. Brigadeiro Faria Lima, São Paulo — SP</div>
+              <div><span>E-mail</span>atendimento@castellariimoveis.com</div>
+              <div><span>Endereço</span>Av. Domingos Antônio di Sandro, São Paulo — SP</div>
             </div>
           </div>
           <form className="reveal" onSubmit={handleSubmit}>
@@ -404,18 +404,18 @@ export default function CastellariLanding() {
               <div className="footer-col">
                 <h4>Contato</h4>
                 <div>+55 11 0000-0000</div>
-                <div>contato@castellariimoveis.com.br</div>
+                <div>atendimento@castellariimoveis.com.br</div>
               </div>
               <div className="footer-col">
                 <h4>Redes</h4>
-                <a href="#">Instagram</a>
+                <a href="https://www.instagram.com/castellari_imoveis_?igsh=MXRyemgwbjByczRtZw==">Instagram</a>
                 <a href="#">LinkedIn</a>
               </div>
             </div>
           </div>
           <div className="footer-bottom">
             <div>© 2026 Castellari Imóveis. CRECI 000000-J.</div>
-            <div>Av. Brigadeiro Faria Lima, São Paulo — SP</div>
+            <div>Av. Domingos Antônio di Sandro, São Paulo — SP</div>
           </div>
         </div>
       </footer>
