@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+ 
+.castellari{
+  --ink:#1B1912;
+  --ink-2:#26221A;
+  --stone:#EDE6D8;
+  --stone-2:#E2D8C4;
+  --stone-3:#D8CBAE;
+  --brass:#A9803F;
+  --brass-light:#C9A667;
+  --bottle:#333F2E;
+  --cream:#F4EFE3;
+  --ink-text:#2A2620;
+  --line:#C9BCA0;
+  --line-dark:#4A4436;
+  --max:1240px;
+ 
+  font-family:'Work Sans', sans-serif;
+  background:var(--stone);
+  color:var(--ink-text);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.castellari *{box-sizing:border-box;}
+.castellari h1,.castellari h2,.castellari h3,.castellari .font-display{
+  font-family:'Fraunces', serif;
+  font-weight:500;
+  letter-spacing:-0.01em;
+  margin:0;
+}
+.castellari p{margin:0;}
+.castellari .mono{
+  font-family:'IBM Plex Mono', monospace;
+  letter-spacing:0.02em;
+}
+.castellari a{color:inherit; text-decoration:none;}
+.castellari img,.castellari svg{display:block; max-width:100%;}
+.castellari .wrap{max-width:var(--max); margin:0 auto; padding:0 40px;}
+@media(max-width:768px){ .castellari .wrap{padding:0 22px;} }
+ 
+/* ---------- reveal on scroll ---------- */
+.castellari .reveal{opacity:0; transform:translateY(18px); transition:opacity .9s ease, transform .9s ease;}
+.castellari .reveal.in{opacity:1; transform:translateY(0);}
+ 
+/* ================= NAV ================= */
+.castellari header.nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:26px 0;
+  transition:background .4s ease, padding .4s ease, border-color .4s ease;
+  border-bottom:1px solid transparent;
+}
+.castellari header.nav.scrolled{
+  background:rgba(27,25,18,0.92);
+  backdrop-filter:blur(6px);
+  padding:16px 0;
+  border-bottom:1px solid rgba(201,166,103,0.25);
+}
+.castellari .nav-inner{display:flex; align-items:center; justify-content:space-between;}
+.castellari .brand{
+  font-family:'Fraunces', serif;
+  font-size:19px;
+  color:var(--cream);
+  letter-spacing:0.14em;
+  font-weight:500;
+  display:flex; align-items:center; gap:10px;
+}
+.castellari .brand .mark{width:9px; height:9px; border:1px solid var(--brass-light); transform:rotate(45deg);}
+.castellari .nav-links{display:flex; align-items:center; gap:38px;}
+.castellari .nav-links a{
+  font-size:13px; color:var(--cream); opacity:.78;
+  text-transform:uppercase; letter-spacing:0.09em;
+  transition:opacity .3s ease;
+}
+.castellari .nav-links a:hover{opacity:1;}
+.castellari .nav-cta{
+  border:1px solid var(--brass-light); color:var(--cream) !important;
+  padding:10px 20px; font-size:12px !important; opacity:1 !important;
+  text-transform:uppercase; letter-spacing:0.09em;
+  transition:background .3s ease, color .3s ease;
+}
+.castellari .nav-cta:hover{background:var(--brass-light); color:var(--ink) !important;}
+.castellari .nav-toggle{display:none; background:none; border:none; color:var(--cream); font-size:22px; cursor:pointer;}
+@media(max-width:860px){
+  .castellari .nav-links{display:none;}
+  .castellari .nav-toggle{display:block;}
+}
+ 
+/* ================= HERO ================= */
+.castellari .hero{
+  background:var(--ink);
+  color:var(--cream);
+  padding:170px 0 90px;
+  position:relative;
+  overflow:hidden;
+}
+.castellari .hero-grid{
+  display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;
+}
+.castellari .hero-eyebrow{
+  display:flex; align-items:center; gap:12px;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.16em;
+  color:var(--brass-light); margin-bottom:26px;
+}
+.castellari .hero-eyebrow .rule{width:34px; height:1px; background:var(--brass-light);}
+.castellari .hero h1{
+  font-size:clamp(38px, 4.4vw, 62px);
+  line-height:1.06;
+  font-weight:500;
+  max-width:620px;
+}
+.castellari .hero h1 em{
+  font-style:italic; font-weight:400; color:var(--brass-light);
+}
+.castellari .hero p.lead{
+  margin-top:26px; font-size:17px; line-height:1.7;
+  color:rgba(244,239,227,0.72); max-width:480px; font-weight:300;
+}
+.castellari .hero-actions{display:flex; gap:16px; margin-top:40px; flex-wrap:wrap;}
+.castellari .btn{
+  padding:15px 28px; font-size:13px; text-transform:uppercase; letter-spacing:0.09em;
+  cursor:pointer; border:1px solid transparent; transition:all .3s ease;
+  display:inline-block;
+}
+.castellari .btn-primary{background:var(--brass-light); color:var(--ink); font-weight:500;}
+.castellari .btn-primary:hover{background:var(--cream);}
+.castellari .btn-ghost{border-color:rgba(244,239,227,0.35); color:var(--cream);}
+.castellari .btn-ghost:hover{border-color:var(--cream);}
+ 
+.castellari .hero-art{position:relative;}
+.castellari .hero-art svg{width:100%; height:auto;}
+.castellari .facade-line{fill:none; stroke:var(--brass-light); stroke-width:1.1; opacity:.9;}
+.castellari .facade-fill{fill:rgba(201,166,103,0.06);}
+.castellari .dim-text{font-family:'IBM Plex Mono', monospace; font-size:10px; fill:var(--brass-light); opacity:.85;}
+ 
+.castellari .draw{stroke-dasharray:1600; stroke-dashoffset:1600; animation:draw 2.4s ease forwards .3s;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.castellari .fade-in-svg{opacity:0; animation:fadeSvg 1.4s ease forwards 1.6s;}
+@keyframes fadeSvg{to{opacity:1;}}
+ 
+/* ================= STATS ================= */
+.castellari .stats{background:var(--ink-2); padding:30px 0;}
+.castellari .stats-inner{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:30px;
+}
+.castellari .stat{padding:20px 0; border-left:1px solid rgba(201,166,103,0.28); padding-left:22px;}
+.castellari .stat .num{font-family:'IBM Plex Mono', monospace; font-size:26px; color:var(--brass-light);}
+.castellari .stat .cap{font-size:12px; color:rgba(244,239,227,0.6); margin-top:6px; text-transform:uppercase; letter-spacing:0.06em;}
+@media(max-width:860px){
+  .castellari .stats-inner{grid-template-columns:repeat(2,1fr);}
+}
+ 
+/* ================= SECTION HEADERS ================= */
+.castellari .section{padding:120px 0;}
+.castellari .section-head{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  gap:40px; margin-bottom:64px; flex-wrap:wrap;
+}
+.castellari .section-head .eyebrow{
+  font-size:12px; text-transform:uppercase; letter-spacing:0.16em; color:var(--brass);
+  display:block; margin-bottom:16px;
+}
+.castellari .section-head h2{font-size:clamp(28px,3vw,42px); max-width:560px; line-height:1.15;}
+.castellari .section-head p{max-width:340px; font-size:15px; line-height:1.65; color:#5c5644; font-weight:300;}
+ 
+/* ================= PROPERTIES ================= */
+.castellari .properties-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
+@media(max-width:960px){.castellari .properties-grid{grid-template-columns:1fr;}}
+.castellari .property-card{
+  background:var(--cream); border:1px solid var(--line);
+}
+.castellari .property-visual{
+  background:linear-gradient(160deg,var(--stone-3),var(--stone-2));
+  padding:26px 22px 18px; position:relative; border-bottom:1px solid var(--line);
+}
+.castellari .property-visual svg{width:100%; height:150px;}
+.castellari .property-tag{
+  position:absolute; top:20px; right:20px;
+  font-size:10px; text-transform:uppercase; letter-spacing:0.08em;
+  background:var(--ink); color:var(--brass-light); padding:6px 10px;
+}
+.castellari .property-body{padding:26px 24px 28px;}
+.castellari .property-body h3{font-size:21px; font-weight:500;}
+.castellari .property-loc{font-size:13px; color:#7a7259; margin-top:6px;}
+.castellari .property-specs{
+  display:flex; gap:18px; margin:20px 0; padding:16px 0;
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.castellari .property-specs .spec{font-size:12px;}
+.castellari .property-specs .spec .v{font-family:'IBM Plex Mono', monospace; font-size:14px; color:var(--ink-text); display:block;}
+.castellari .property-specs .spec .l{color:#8a8267; text-transform:uppercase; letter-spacing:0.05em; font-size:10px;}
+.castellari .property-price{
+  font-family:'IBM Plex Mono', monospace; font-size:19px; color:var(--brass);
+}
+.castellari .property-cta{
+  margin-top:18px; font-size:12px; text-transform:uppercase; letter-spacing:0.08em;
+  display:inline-flex; align-items:center; gap:8px; color:var(--ink-text);
+  border-bottom:1px solid var(--ink-text); padding-bottom:3px;
+}
+ 
+/* ================= DIFERENCIAIS ================= */
+.castellari .diff-section{background:var(--ink); color:var(--cream);}
+.castellari .diff-section .section-head p{color:rgba(244,239,227,0.6);}
+.castellari .diff-section .section-head .eyebrow{color:var(--brass-light);}
+.castellari .diff-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(201,166,103,0.22);}
+@media(max-width:860px){.castellari .diff-grid{grid-template-columns:repeat(2,1fr);}}
+.castellari .diff-item{background:var(--ink); padding:36px 28px;}
+.castellari .diff-item .icon{width:30px; height:30px; margin-bottom:22px;}
+.castellari .diff-item .icon svg{stroke:var(--brass-light); fill:none; stroke-width:1.3;}
+.castellari .diff-item h3{font-size:17px; font-weight:500; margin-bottom:10px;}
+.castellari .diff-item p{font-size:13.5px; line-height:1.6; color:rgba(244,239,227,0.6); font-weight:300;}
+ 
+/* ================= PROCESSO ================= */
+.castellari .process-list{display:flex; flex-direction:column;}
+.castellari .process-item{
+  display:grid; grid-template-columns:90px 1fr; gap:30px;
+  padding:32px 0; border-top:1px solid var(--line);
+  align-items:start;
+}
+.castellari .process-item:last-child{border-bottom:1px solid var(--line);}
+.castellari .process-item .idx{font-family:'IBM Plex Mono', monospace; font-size:14px; color:var(--brass); padding-top:4px;}
+.castellari .process-item h3{font-size:20px; font-weight:500; margin-bottom:8px;}
+.castellari .process-item p{font-size:14.5px; color:#5c5644; line-height:1.65; max-width:560px; font-weight:300;}
+ 
+/* ================= DEPOIMENTOS ================= */
+.castellari .testi-section{background:var(--stone-2);}
+.castellari .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+@media(max-width:960px){.castellari .testi-grid{grid-template-columns:1fr;}}
+.castellari .testi-card{background:var(--cream); border:1px solid var(--line); padding:32px 28px;}
+.castellari .testi-card p{font-size:15px; line-height:1.75; font-style:italic; color:#3a3527; font-family:'Fraunces', serif; font-weight:400;}
+.castellari .testi-who{display:flex; align-items:center; gap:12px; margin-top:24px;}
+.castellari .testi-avatar{
+  width:38px; height:38px; border-radius:50%; border:1px solid var(--brass);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--brass);
+}
+.castellari .testi-who .name{font-size:13px; font-weight:500;}
+.castellari .testi-who .role{font-size:11.5px; color:#8a8267;}
+ 
+/* ================= CONTATO ================= */
+.castellari .contact-section{background:var(--ink); color:var(--cream);}
+.castellari .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:70px;}
+@media(max-width:900px){.castellari .contact-grid{grid-template-columns:1fr; gap:50px;}}
+.castellari .contact-info h2{font-size:clamp(28px,3vw,40px); max-width:420px; line-height:1.15;}
+.castellari .contact-info p{margin-top:20px; font-size:15px; color:rgba(244,239,227,0.65); max-width:380px; line-height:1.7; font-weight:300;}
+.castellari .eyebrow-inline{
+  color:var(--brass-light); font-size:12px; text-transform:uppercase;
+  letter-spacing:.16em; display:block; margin-bottom:16px;
+}
+.castellari .contact-detail{margin-top:36px; display:flex; flex-direction:column; gap:14px;}
+.castellari .contact-detail div{font-size:13.5px; color:rgba(244,239,227,0.8);}
+.castellari .contact-detail span{display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--brass-light); margin-bottom:4px;}
+ 
+.castellari form{display:flex; flex-direction:column; gap:22px;}
+.castellari .form-row{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+@media(max-width:560px){.castellari .form-row{grid-template-columns:1fr;}}
+.castellari .field{display:flex; flex-direction:column; gap:8px;}
+.castellari .field label{font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:rgba(244,239,227,0.55);}
+.castellari .field input, .castellari .field textarea{
+  background:transparent; border:none; border-bottom:1px solid rgba(244,239,227,0.28);
+  padding:10px 2px; color:var(--cream); font-family:'Work Sans', sans-serif; font-size:14px;
+  outline:none; transition:border-color .3s ease; width:100%;
+}
+.castellari .field input:focus, .castellari .field textarea:focus{border-color:var(--brass-light);}
+.castellari .field textarea{resize:vertical; min-height:80px;}
+.castellari .form-submit{
+  align-self:flex-start; margin-top:6px;
+  background:var(--brass-light); color:var(--ink); border:none;
+  padding:15px 30px; font-size:13px; text-transform:uppercase; letter-spacing:0.09em;
+  cursor:pointer; transition:background .3s ease;
+  font-family:'Work Sans', sans-serif; font-weight:500;
+}
+.castellari .form-submit:hover{background:var(--cream);}
+.castellari .form-note{font-size:12px; color:rgba(244,239,227,0.5); margin-top:4px;}
+ 
+/* ================= FOOTER ================= */
+.castellari footer{background:#15130E; color:rgba(244,239,227,0.55); padding:56px 0 30px;}
+.castellari .footer-brand{margin-bottom:0;}
+.castellari .footer-top{
+  display:flex; justify-content:space-between; align-items:flex-start;
+  gap:40px; flex-wrap:wrap; padding-bottom:36px; border-bottom:1px solid rgba(201,166,103,0.18);
+}
+.castellari .footer-links{display:flex; gap:60px; flex-wrap:wrap;}
+.castellari .footer-col h4{font-size:11px; text-transform:uppercase; letter-spacing:0.09em; color:var(--brass-light); margin-bottom:14px;}
+.castellari .footer-col a, .castellari .footer-col div{display:block; font-size:13px; margin-bottom:9px; color:rgba(244,239,227,0.6);}
+.castellari .footer-bottom{
+  display:flex; justify-content:space-between; padding-top:26px; font-size:12px;
+  color:rgba(244,239,227,0.4); flex-wrap:wrap; gap:10px;
+}
