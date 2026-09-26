@@ -372,7 +372,7 @@ export default function CastellariLanding() {
             <h2>Vamos entender o que você procura.</h2>
             <p>Preencha os campos ao lado e um de nossos consultores retorna o contato em até um dia útil.</p>
             <div className="contact-detail">
-              <div><span>Telefone</span>+55 11 0000-0000</div>
+              <div><span>Telefone</span>+55 11 91222-2196</div>
               <div><span>E-mail</span>atendimento@castellariimoveis.com</div>
               <div><span>Endereço</span>Av. Domingos Antônio di Sandro, São Paulo — SP</div>
             </div>
@@ -403,7 +403,7 @@ export default function CastellariLanding() {
               </div>
               <div className="footer-col">
                 <h4>Contato</h4>
-                <div>+55 11 0000-0000</div>
+                <div>+55 11 91222-2196</div>
                 <div>atendimento@castellariimoveis.com.br</div>
               </div>
               <div className="footer-col">
