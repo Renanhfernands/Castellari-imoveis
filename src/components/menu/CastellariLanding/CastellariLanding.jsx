@@ -104,7 +104,7 @@ const DIFERENCIAIS = [
   },
   {
     title: "Acompanhamento pós-venda",
-    text: "Nossa equipe permanece à disposição após a escritura, para o que for necessário.",
+    text: "A nossa equipe permanece à disposição após a escritura, para o que for necessário.",
     icon: (
       <svg viewBox="0 0 30 30">
         <path d="M6 15h6l3-8 3 16 3-8h3" />
