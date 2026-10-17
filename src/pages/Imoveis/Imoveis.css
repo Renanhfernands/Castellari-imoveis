@@ -18,15 +18,23 @@
 }
 
 .logo {
-  font-family: Georgia, serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #f3eee4;
+
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 20px;
   font-weight: bold;
   letter-spacing: 2px;
 }
 
-.logo span {
-  color: #c9a45f;
-  margin-right: 8px;
+.logo-castelo {
+  width: 50px;
+  height: 34px;
+  display: block;
+  flex-shrink: 0;
 }
 
 .imoveis-header nav {

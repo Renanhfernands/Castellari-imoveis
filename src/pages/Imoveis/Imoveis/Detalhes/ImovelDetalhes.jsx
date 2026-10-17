@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import imoveis from "../../../../Data/Imoveiss.js";
 import "./ImovelDetalhes.css";
@@ -8,6 +9,8 @@ export default function ImovelDetalhes() {
   const imovel = imoveis.find(
     (item) => String(item.id) === String(id)
   );
+
+  const [fotoAtual, setFotoAtual] = useState(0);
 
   if (!imovel) {
     return (
@@ -42,21 +45,99 @@ export default function ImovelDetalhes() {
           ← Voltar para imóveis
         </Link>
 
-        {/* CAPA */}
+        {/* CARROSSEL */}
 
-<section className="detalhe-capa">
-  {imagens.length > 0 ? (
-    <img
-      src={imagens[0]}
-      alt={imovel.titulo}
-    />
-  ) : (
-    <div className="detalhe-sem-imagem">
-      <span>CASTELLARI IMÓVEIS</span>
-      <p>IMAGEM DA PROPRIEDADE</p>
-    </div>
-  )}
-</section>
+        <section className="detalhe-carrossel">
+
+          {imagens.length > 0 ? (
+            <>
+              <div className="carrossel-principal">
+
+                <img
+                  src={imagens[fotoAtual]}
+                  alt={`${imovel.titulo} - foto ${fotoAtual + 1}`}
+                  className="carrossel-imagem"
+                />
+
+                <div className="carrossel-marca">
+                  CASTELLARI IMÓVEIS
+                </div>
+
+                {imagens.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      className="carrossel-seta carrossel-esquerda"
+                      onClick={() =>
+                        setFotoAtual((foto) =>
+                          foto === 0
+                            ? imagens.length - 1
+                            : foto - 1
+                        )
+                      }
+                      aria-label="Foto anterior"
+                    >
+                      ‹
+                    </button>
+
+                    <button
+                      type="button"
+                      className="carrossel-seta carrossel-direita"
+                      onClick={() =>
+                        setFotoAtual((foto) =>
+                          foto === imagens.length - 1
+                            ? 0
+                            : foto + 1
+                        )
+                      }
+                      aria-label="Próxima foto"
+                    >
+                      ›
+                    </button>
+
+                    <div className="carrossel-contador">
+                      {fotoAtual + 1} / {imagens.length}
+                    </div>
+                  </>
+                )}
+
+              </div>
+
+              {imagens.length > 1 && (
+                <div className="carrossel-miniaturas">
+
+                  {imagens.map((imagem, index) => (
+                    <button
+                      type="button"
+                      key={index}
+                      className={`carrossel-miniatura ${
+                        fotoAtual === index
+                          ? "ativa"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setFotoAtual(index)
+                      }
+                    >
+                      <img
+                        src={imagem}
+                        alt={`Miniatura ${index + 1}`}
+                        loading="lazy"
+                      />
+                    </button>
+                  ))}
+
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="detalhe-sem-imagem">
+              <span>CASTELLARI IMÓVEIS</span>
+              <p>IMAGEM DA PROPRIEDADE</p>
+            </div>
+          )}
+
+        </section>
 
         {/* INFORMAÇÕES */}
 
@@ -148,33 +229,6 @@ export default function ImovelDetalhes() {
 
           </section>
 
-          {/* GALERIA */}
-
-          {imagens.length > 1 && (
-            <section className="detalhe-galeria">
-
-              <h2>
-                Galeria
-              </h2>
-
-              <div className="detalhe-galeria-grid">
-
-                {imagens.slice(1).map(
-                  (imagem, index) => (
-                    <img
-                      key={index}
-                      src={imagem}
-                      alt={`${imovel.titulo} - foto ${index + 2}`}
-                      loading="lazy"
-                    />
-                  )
-                )}
-
-              </div>
-
-            </section>
-          )}
-
           {/* VÍDEO */}
 
           {imovel.video && (
@@ -214,12 +268,13 @@ export default function ImovelDetalhes() {
               Imóveis para saber mais informações.
             </p>
 
- <a
-  href="/#contato"
-  className="detalhe-contato-button"
->
-  FALAR COM UM CONSULTOR
-</a>
+            <a
+              href="/#contato"
+              className="detalhe-contato-button"
+            >
+              FALAR COM UM CONSULTOR
+            </a>
+
           </section>
 
         </section>
