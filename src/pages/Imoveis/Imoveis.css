@@ -1,0 +1,167 @@
+.imoveis-page {
+  min-height: 100vh;
+  background: #171711;
+  color: #f3eee4;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+
+.imoveis-header {
+  height: 64px;
+  padding: 0 42px;
+  border-bottom: 1px solid #2e2b23;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.logo span {
+  color: #c9a45f;
+  margin-right: 8px;
+}
+
+.imoveis-header nav {
+  display: flex;
+  gap: 38px;
+}
+
+.imoveis-header nav a {
+  color: #c9c4b8;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+
+.imoveis-header button {
+  background: transparent;
+  border: 1px solid #c9a45f;
+  color: #f3eee4;
+  padding: 11px 20px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+/* CONTEÚDO */
+
+.imoveis-content {
+  padding: 75px 7%;
+}
+
+.imoveis-intro {
+  max-width: 700px;
+  margin-bottom: 65px;
+}
+
+.eyebrow {
+  color: #c9a45f;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.imoveis-intro h1 {
+  font-family: Georgia, serif;
+  font-size: 58px;
+  line-height: 1.05;
+  font-weight: normal;
+  margin: 22px 0;
+}
+
+.imoveis-intro h1 em {
+  color: #c9a45f;
+  font-weight: normal;
+}
+
+.imoveis-intro p {
+  max-width: 520px;
+  color: #aaa79d;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* GRID */
+
+.imoveis-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.imovel-card {
+  border: 1px solid #37342b;
+  background: #1d1c16;
+}
+
+.imovel-image {
+  height: 350px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #777267;
+  background: #24231c;
+  letter-spacing: 2px;
+  font-size: 11px;
+}
+
+.imovel-info {
+  padding: 28px;
+}
+
+.imovel-info > span {
+  color: #c9a45f;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.imovel-info h2 {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: normal;
+  margin: 12px 0;
+}
+
+.imovel-info p {
+  color: #99958b;
+  font-size: 14px;
+}
+
+.imovel-info strong {
+  display: block;
+  margin-top: 22px;
+  color: #f3eee4;
+  font-size: 18px;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 900px) {
+  .imoveis-header nav {
+    display: none;
+  }
+
+  .imoveis-header {
+    padding: 0 20px;
+  }
+
+  .imoveis-content {
+    padding: 50px 25px;
+  }
+
+  .imoveis-intro h1 {
+    font-size: 42px;
+  }
+
+  .imoveis-grid {
+    grid-template-columns: 1fr;
+  }
+}

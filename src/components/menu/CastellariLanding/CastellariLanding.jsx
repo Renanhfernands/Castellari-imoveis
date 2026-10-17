@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./CastellariLanding.css";
+import { Link } from "react-router-dom";
 
 const PROPERTIES = [
   {
@@ -211,7 +212,13 @@ export default function CastellariLanding() {
             <h1>Cada endereço,<br /><em>lavrado</em> com precisão.</h1>
             <p className="lead">A Castellari seleciona um portfólio restrito de imóveis de alto padrão. Cada propriedade é avaliada, medida e apresentada com o mesmo rigor de um projeto arquitetônico.</p>
             <div className="hero-actions">
-              <a href="#imoveis" className="btn btn-primary">Ver imóveis selecionados</a>
+              <Link 
+                to="/imoveis"
+                className="btn btn-primary"
+                >
+                  Ver imóveis selecionados
+                  </Link>
+             
               <a href="#contato" className="btn btn-ghost">Falar com um consultor</a>
             </div>
           </div>
