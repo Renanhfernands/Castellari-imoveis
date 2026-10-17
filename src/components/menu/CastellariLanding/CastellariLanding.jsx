@@ -269,31 +269,383 @@ export default function CastellariLanding() {
             </div>
           </div>
           <div className="hero-art">
-            <svg viewBox="0 0 480 560">
-              <rect className="facade-fill" x="90" y="60" width="300" height="420" />
-              <rect className="facade-line draw" x="90" y="60" width="300" height="420" />
-              <g className="facade-line draw">
-                <line x1="90" y1="130" x2="390" y2="130" />
-                <line x1="90" y1="200" x2="390" y2="200" />
-                <line x1="90" y1="270" x2="390" y2="270" />
-                <line x1="90" y1="340" x2="390" y2="340" />
-                <line x1="90" y1="410" x2="390" y2="410" />
-                <line x1="165" y1="60" x2="165" y2="480" />
-                <line x1="240" y1="60" x2="240" y2="480" />
-                <line x1="315" y1="60" x2="315" y2="480" />
-              </g>
-              <rect className="facade-line draw" x="215" y="410" width="50" height="70" />
-              <g className="fade-in-svg">
-                <line className="facade-line" x1="90" y1="500" x2="390" y2="500" />
-                <line className="facade-line" x1="90" y1="495" x2="90" y2="505" />
-                <line className="facade-line" x1="390" y1="495" x2="390" y2="505" />
-                <text className="dim-text" x="205" y="518">18,60 m</text>
-                <line className="facade-line" x1="420" y1="60" x2="420" y2="480" />
-                <line className="facade-line" x1="415" y1="60" x2="425" y2="60" />
-                <line className="facade-line" x1="415" y1="480" x2="425" y2="480" />
-                <text className="dim-text" x="432" y="274" transform="rotate(90 432 274)">31,20 m</text>
-              </g>
-            </svg>
+       <svg viewBox="0 0 560 560">
+
+  {/* preenchimento da fachada */}
+  <path
+    className="facade-fill"
+    d="
+      M70 475
+      V230
+      L88 210
+      L106 230
+      L124 210
+      L142 230
+
+      V195
+      L160 175
+      L178 195
+      L196 175
+      L214 195
+
+      V215
+      H235
+      V165
+      L280 115
+      L325 165
+      V215
+      H346
+
+      V195
+      L364 175
+      L382 195
+      L400 175
+      L418 195
+
+      V230
+      L436 210
+      L454 230
+      L472 210
+      L490 230
+
+      V475
+      Z
+    "
+  />
+
+  <g className="facade-line draw">
+
+    {/* ================= TORRE ESQUERDA ================= */}
+
+    <path
+      d="
+        M70 475
+        V230
+        L88 210
+        L106 230
+        L124 210
+        L142 230
+        V475
+      "
+      fill="none"
+    />
+
+    {/* detalhes superiores */}
+    <line x1="88" y1="210" x2="88" y2="185" />
+    <line x1="106" y1="230" x2="106" y2="200" />
+    <line x1="124" y1="210" x2="124" y2="185" />
+
+    {/* janela */}
+    <path
+      d="
+        M88 305
+        V275
+        C88 255 124 255 124 275
+        V305
+      "
+      fill="none"
+    />
+
+    <line x1="106" y1="255" x2="106" y2="305" />
+
+    {/* ================= TORRE INTERMEDIÁRIA ESQUERDA ================= */}
+
+    <path
+      d="
+        M142 475
+        V195
+        L160 175
+        L178 195
+        L196 175
+        L214 195
+        V475
+      "
+      fill="none"
+    />
+
+    {/* janela */}
+    <path
+      d="
+        M158 285
+        V260
+        C158 242 198 242 198 260
+        V285
+      "
+      fill="none"
+    />
+
+    <line x1="178" y1="242" x2="178" y2="285" />
+
+    {/* ================= TORRE CENTRAL ================= */}
+
+    <path
+      d="
+        M214 475
+        V215
+        H235
+        V165
+        L280 115
+        L325 165
+        V215
+        H346
+        V475
+      "
+      fill="none"
+    />
+
+    {/* telhado central detalhado */}
+    <line x1="235" y1="165" x2="280" y2="135" />
+    <line x1="280" y1="135" x2="325" y2="165" />
+
+    {/* bandeira */}
+    <line
+      x1="280"
+      y1="115"
+      x2="280"
+      y2="78"
+    />
+
+    <path
+      d="
+        M280 78
+        L305 86
+        L280 96
+        Z
+      "
+      fill="none"
+    />
+
+    {/* janela central superior */}
+    <path
+      d="
+        M263 205
+        V180
+        C263 165 297 165 297 180
+        V205
+      "
+      fill="none"
+    />
+
+    <line
+      x1="280"
+      y1="165"
+      x2="280"
+      y2="205"
+    />
+
+    {/* ================= TORRE INTERMEDIÁRIA DIREITA ================= */}
+
+    <path
+      d="
+        M346 475
+        V195
+        L364 175
+        L382 195
+        L400 175
+        L418 195
+        V475
+      "
+      fill="none"
+    />
+
+    {/* janela */}
+    <path
+      d="
+        M362 285
+        V260
+        C362 242 402 242 402 260
+        V285
+      "
+      fill="none"
+    />
+
+    <line x1="382" y1="242" x2="382" y2="285" />
+
+    {/* ================= TORRE DIREITA ================= */}
+
+    <path
+      d="
+        M418 475
+        V230
+        L436 210
+        L454 230
+        L472 210
+        L490 230
+        V475
+      "
+      fill="none"
+    />
+
+    {/* janela */}
+    <path
+      d="
+        M436 305
+        V275
+        C436 255 472 255 472 275
+        V305
+      "
+      fill="none"
+    />
+
+    <line x1="454" y1="255" x2="454" y2="305" />
+
+    {/* ================= CORPO PRINCIPAL ================= */}
+
+    {/* linha estrutural superior */}
+    <line x1="142" y1="330" x2="418" y2="330" />
+
+    {/* linha estrutural inferior */}
+    <line x1="142" y1="395" x2="418" y2="395" />
+
+    {/* janelas do primeiro nível */}
+    <path
+      d="
+        M175 325
+        V295
+        C175 275 205 275 205 295
+        V325
+      "
+      fill="none"
+    />
+
+    <path
+      d="
+        M355 325
+        V295
+        C355 275 385 275 385 295
+        V325
+      "
+      fill="none"
+    />
+
+    {/* janelas do segundo nível */}
+    <path
+      d="
+        M225 375
+        V350
+        C225 335 245 335 245 350
+        V375
+      "
+      fill="none"
+    />
+
+    <path
+      d="
+        M315 375
+        V350
+        C315 335 335 335 335 350
+        V375
+      "
+      fill="none"
+    />
+
+    {/* ================= ENTRADA ================= */}
+
+    <path
+      d="
+        M245 475
+        V405
+        C245 365 315 365 315 405
+        V475
+      "
+      fill="none"
+    />
+
+    {/* porta dupla */}
+    <line
+      x1="280"
+      y1="380"
+      x2="280"
+      y2="475"
+    />
+
+    {/* detalhes da entrada */}
+    <line x1="235" y1="405" x2="245" y2="405" />
+    <line x1="315" y1="405" x2="325" y2="405" />
+
+    {/* pequenas colunas */}
+    <line x1="235" y1="405" x2="235" y2="475" />
+    <line x1="325" y1="405" x2="325" y2="475" />
+
+    {/* base arquitetônica */}
+    <line x1="70" y1="475" x2="490" y2="475" />
+
+  </g>
+
+  {/* ================= COTAS ================= */}
+
+  <g className="fade-in-svg">
+
+    {/* medida horizontal */}
+    <line
+      className="facade-line"
+      x1="70"
+      y1="505"
+      x2="490"
+      y2="505"
+    />
+
+    <line
+      className="facade-line"
+      x1="70"
+      y1="500"
+      x2="70"
+      y2="510"
+    />
+
+    <line
+      className="facade-line"
+      x1="490"
+      y1="500"
+      x2="490"
+      y2="510"
+    />
+
+    <text
+      className="dim-text"
+      x="255"
+      y="523"
+    >
+      18,60 m
+    </text>
+
+    {/* medida vertical */}
+    <line
+      className="facade-line"
+      x1="520"
+      y1="78"
+      x2="520"
+      y2="475"
+    />
+
+    <line
+      className="facade-line"
+      x1="515"
+      y1="78"
+      x2="525"
+      y2="78"
+    />
+
+    <line
+      className="facade-line"
+      x1="515"
+      y1="475"
+      x2="525"
+      y2="475"
+    />
+
+    <text
+      className="dim-text"
+      x="535"
+      y="300"
+      transform="rotate(90 535 300)"
+    >
+      31,20 m
+    </text>
+
+  </g>
+
+</svg>
           </div>
         </div>
       </section>
