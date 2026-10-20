@@ -1,18 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import imoveis from "../../../../Data/Imoveiss.js";
 import "./ImovelDetalhes.css";
+import { buscarImovel } from "../../../../services/api";
 
 export default function ImovelDetalhes() {
   const { id } = useParams();
 
-  const imovel = imoveis.find(
-    (item) => String(item.id) === String(id)
-  );
-
+  const [imovel, setImovel] = useState(null);
   const [fotoAtual, setFotoAtual] = useState(0);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState(false);
 
-  if (!imovel) {
+  useEffect(() => {
+    async function carregarImovel() {
+      try {
+        setCarregando(true);
+        setErro(false);
+
+        const dados = await buscarImovel(id);
+
+        setImovel(dados);
+        setFotoAtual(0);
+      } catch (error) {
+        console.error("Erro ao buscar imóvel:", error);
+        setErro(true);
+      } finally {
+        setCarregando(false);
+      }
+    }
+
+    carregarImovel();
+  }, [id]);
+
+  /*
+    CARREGANDO
+  */
+
+  if (carregando) {
+    return (
+      <main className="imovel-detalhes">
+        <div className="imovel-detalhes-container">
+          <p>Carregando imóvel...</p>
+        </div>
+      </main>
+    );
+  }
+
+  /*
+    ERRO / IMÓVEL NÃO ENCONTRADO
+  */
+
+  if (erro || !imovel) {
     return (
       <main className="imovel-detalhes">
         <div className="imovel-detalhes-container">
@@ -30,9 +68,48 @@ export default function ImovelDetalhes() {
     );
   }
 
+  /*
+    FUNÇÃO PARA CORRIGIR URL DAS IMAGENS
+  */
+
+  function obterUrlImagem(url) {
+    if (!url) {
+      return "";
+    }
+
+    if (url.startsWith("/uploads/")) {
+      return `http://localhost:3000${url}`;
+    }
+
+    return url;
+  }
+
+  /*
+    IMAGENS
+  */
+
   const imagens = Array.isArray(imovel.imagens)
-    ? imovel.imagens
+    ? imovel.imagens.map((imagem) =>
+        obterUrlImagem(imagem.url)
+      )
     : [];
+
+  /*
+    FORMATAÇÕES
+  */
+
+  const precoFormatado = Number(imovel.preco).toLocaleString(
+    "pt-BR",
+    {
+      style: "currency",
+      currency: "BRL",
+    }
+  );
+
+  const areaFormatada =
+    imovel.area !== null && imovel.area !== undefined
+      ? `${imovel.area} m²`
+      : null;
 
   return (
     <main className="imovel-detalhes">
@@ -103,6 +180,8 @@ export default function ImovelDetalhes() {
 
               </div>
 
+              {/* MINIATURAS */}
+
               {imagens.length > 1 && (
                 <div className="carrossel-miniaturas">
 
@@ -159,7 +238,7 @@ export default function ImovelDetalhes() {
 
           {imovel.preco && (
             <p className="detalhe-preco">
-              {imovel.preco}
+              {precoFormatado}
             </p>
           )}
 
@@ -167,46 +246,50 @@ export default function ImovelDetalhes() {
 
           <div className="detalhe-caracteristicas">
 
-            {imovel.detalhes?.quartos !== undefined && (
-              <div className="caracteristica">
-                <strong>
-                  {imovel.detalhes.quartos}
-                </strong>
-                <span>Quartos</span>
-              </div>
-            )}
+            {imovel.quartos !== null &&
+              imovel.quartos !== undefined && (
+                <div className="caracteristica">
+                  <strong>
+                    {imovel.quartos}
+                  </strong>
+                  <span>Quartos</span>
+                </div>
+              )}
 
-            {imovel.detalhes?.suites !== undefined && (
-              <div className="caracteristica">
-                <strong>
-                  {imovel.detalhes.suites}
-                </strong>
-                <span>Suítes</span>
-              </div>
-            )}
+            {imovel.suites !== null &&
+              imovel.suites !== undefined && (
+                <div className="caracteristica">
+                  <strong>
+                    {imovel.suites}
+                  </strong>
+                  <span>Suítes</span>
+                </div>
+              )}
 
-            {imovel.detalhes?.banheiros !== undefined && (
-              <div className="caracteristica">
-                <strong>
-                  {imovel.detalhes.banheiros}
-                </strong>
-                <span>Banheiros</span>
-              </div>
-            )}
+            {imovel.banheiros !== null &&
+              imovel.banheiros !== undefined && (
+                <div className="caracteristica">
+                  <strong>
+                    {imovel.banheiros}
+                  </strong>
+                  <span>Banheiros</span>
+                </div>
+              )}
 
-            {imovel.detalhes?.vagas !== undefined && (
-              <div className="caracteristica">
-                <strong>
-                  {imovel.detalhes.vagas}
-                </strong>
-                <span>Vagas</span>
-              </div>
-            )}
+            {imovel.vagas !== null &&
+              imovel.vagas !== undefined && (
+                <div className="caracteristica">
+                  <strong>
+                    {imovel.vagas}
+                  </strong>
+                  <span>Vagas</span>
+                </div>
+              )}
 
-            {imovel.detalhes?.area && (
+            {areaFormatada && (
               <div className="caracteristica">
                 <strong>
-                  {imovel.detalhes.area}
+                  {areaFormatada}
                 </strong>
                 <span>Área</span>
               </div>

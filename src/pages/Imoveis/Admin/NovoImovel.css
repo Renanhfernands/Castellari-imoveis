@@ -1,0 +1,156 @@
+.novo-imovel {
+  min-height: 100vh;
+  background: #f5f6f8;
+  padding: 50px 30px;
+}
+
+.novo-imovel-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.novo-imovel-header {
+  margin-bottom: 35px;
+}
+
+.novo-imovel-header h1 {
+  margin: 8px 0;
+  font-size: 36px;
+  color: #222;
+}
+
+.novo-imovel-header p {
+  margin: 0;
+  color: #777;
+}
+
+.novo-imovel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-section h2 {
+  margin: 0 0 25px;
+  font-size: 20px;
+  color: #222;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group-full {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 15px;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #222;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-erro {
+  padding: 15px;
+  border-radius: 7px;
+  background: #ffe8e8;
+  color: #b00020;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-bottom: 30px;
+}
+
+.button-cancelar,
+.button-salvar {
+  border: none;
+  border-radius: 7px;
+  padding: 13px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button-cancelar {
+  background: #ddd;
+  color: #333;
+}
+
+.button-salvar {
+  background: #222;
+  color: white;
+}
+
+.button-cancelar:disabled,
+.button-salvar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .novo-imovel {
+    padding: 30px 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group-full {
+    grid-column: auto;
+  }
+
+  .form-section {
+    padding: 20px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .button-cancelar,
+  .button-salvar {
+    width: 100%;
+  }
+}
