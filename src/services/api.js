@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000";
+const API_URL = "https://castellari-imoveis-production.up.railway.app";
 
 export async function buscarImoveis() {
   const resposta = await fetch(`${API_URL}/imoveis`);
