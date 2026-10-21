@@ -44,7 +44,6 @@ const upload = multer({
   storage,
 });
 
-
 // ==========================================
 // TESTE DA API
 // ==========================================
@@ -54,7 +53,6 @@ app.get("/", (req, res) => {
     mensagem: "API Castellari Imóveis funcionando!",
   });
 });
-
 
 // ==========================================
 // TESTE DO BANCO
@@ -66,6 +64,8 @@ app.get("/teste-banco", async (req, res) => {
       "SELECT DATABASE() AS banco"
     );
 
+    console.log("🗄️ BANCO CONECTADO:", resultado);
+
     res.json(resultado);
   } catch (error) {
     console.error(error);
@@ -75,7 +75,6 @@ app.get("/teste-banco", async (req, res) => {
     });
   }
 });
-
 
 // ==========================================
 // LISTAR IMÓVEIS
@@ -108,7 +107,6 @@ app.get("/imoveis", async (req, res) => {
     });
   }
 });
-
 
 // ==========================================
 // BUSCAR UM IMÓVEL
@@ -272,7 +270,14 @@ app.put("/imoveis/:id", async (req, res) => {
 // ==========================================
 
 app.post("/imoveis", async (req, res) => {
+  console.log("");
+  console.log("==========================================");
+  console.log("🔥 POST /imoveis RECEBIDO");
+  console.log("==========================================");
+
   try {
+    console.log("📦 DADOS RECEBIDOS:", req.body);
+
     const {
       tipo,
       titulo,
@@ -294,11 +299,16 @@ app.post("/imoveis", async (req, res) => {
       !localizacao ||
       preco === undefined
     ) {
+      console.log("❌ VALIDAÇÃO FALHOU");
+
       return res.status(400).json({
         erro:
           "Tipo, título, localização e preço são obrigatórios.",
       });
     }
+
+    console.log("✅ VALIDAÇÃO OK");
+    console.log("💾 TENTANDO INSERIR NO BANCO...");
 
     const [resultado] = await db.query(
       `INSERT INTO imoveis
@@ -333,25 +343,57 @@ app.post("/imoveis", async (req, res) => {
       ]
     );
 
-    console.log("RESULTADO DO INSERT:", resultado);
+    console.log("🔥 INSERT EXECUTADO");
+    console.log("📊 RESULTADO:", resultado);
+    console.log("🆔 ID GERADO:", resultado.insertId);
+
+    // ==========================================
+    // VERIFICAR QUAL BANCO ESTÁ SENDO USADO
+    // ==========================================
+
+    const [conexao] = await db.query(`
+      SELECT
+        DATABASE() AS banco,
+        @@hostname AS host,
+        @@port AS porta,
+        USER() AS usuario
+    `);
+
+    console.log("🔎 CONEXÃO DO BACKEND:");
+    console.log(conexao[0]);
+
+    // ==========================================
+    // VERIFICAR SE O IMÓVEL EXISTE APÓS O INSERT
+    // ==========================================
+
+    const [imovelCriado] = await db.query(
+      "SELECT * FROM imoveis WHERE id = ?",
+      [resultado.insertId]
+    );
+
+    console.log("🔎 IMÓVEL APÓS INSERT:");
+    console.log(imovelCriado);
+
+    // ==========================================
+    // RESPOSTA
+    // ==========================================
 
     res.status(201).json({
       mensagem: "Imóvel cadastrado com sucesso.",
       id: resultado.insertId,
     });
+
   } catch (error) {
+    console.error("");
+    console.error("❌ ERRO AO CADASTRAR IMÓVEL:");
     console.error(error);
+    console.error("");
 
     res.status(500).json({
       erro: "Não foi possível cadastrar o imóvel.",
     });
   }
 });
-
-
-// ==========================================
-// SERVIDOR
-// ==========================================
 
 // ==========================================
 // UPLOAD DE IMAGENS DO IMÓVEL
@@ -419,6 +461,10 @@ app.post(
   }
 );
 
+// ==========================================
+// SERVIDOR
+// ==========================================
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
@@ -426,3 +472,4 @@ app.listen(PORT, "0.0.0.0", () => {
     `Servidor rodando na porta ${PORT}`
   );
 });
+

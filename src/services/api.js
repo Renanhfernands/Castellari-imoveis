@@ -1,5 +1,9 @@
 const API_URL = "https://castellari-imoveis-production.up.railway.app";
 
+// ==========================================
+// LISTAR IMÓVEIS
+// ==========================================
+
 export async function buscarImoveis() {
   const resposta = await fetch(`${API_URL}/imoveis`);
 
@@ -9,6 +13,10 @@ export async function buscarImoveis() {
 
   return resposta.json();
 }
+
+// ==========================================
+// BUSCAR UM IMÓVEL
+// ==========================================
 
 export async function buscarImovel(id) {
   const resposta = await fetch(`${API_URL}/imoveis/${id}`);
