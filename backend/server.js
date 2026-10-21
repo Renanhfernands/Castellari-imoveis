@@ -333,6 +333,8 @@ app.post("/imoveis", async (req, res) => {
       ]
     );
 
+    console.log("RESULTADO DO INSERT:", resultado);
+
     res.status(201).json({
       mensagem: "Imóvel cadastrado com sucesso.",
       id: resultado.insertId,
