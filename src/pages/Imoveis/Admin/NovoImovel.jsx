@@ -217,6 +217,11 @@ export default function NovoImovel() {
                   <option value="Comercial">
                     Comercial
                   </option>
+
+                <option value="Sobrado">
+                    Sobrado
+                  </option>
+
                 </select>
               </div>
 
