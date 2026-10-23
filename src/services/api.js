@@ -1,4 +1,4 @@
-const API_URL = "https://castellari-imoveis-production.up.railway.app";
+const API_URL = "https://castellari-imoveis.onrender.com";
 
 // ==========================================
 // LISTAR IMÓVEIS
