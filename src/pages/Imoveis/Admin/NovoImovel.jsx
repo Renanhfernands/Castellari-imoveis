@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./NovoImovel.css";
 
+const API_URL = "https://castellari-imoveis.onrender.com";
+
 export default function NovoImovel() {
   const navigate = useNavigate();
 
@@ -72,7 +74,7 @@ export default function NovoImovel() {
       setErro("");
 
       // 1. Cadastra o imóvel
-      const resposta = await fetch("http://localhost:3000/imoveis", {
+      const resposta = await fetch(`${API_URL}/imoveis`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -131,7 +133,7 @@ export default function NovoImovel() {
         });
 
         const respostaImagens = await fetch(
-          `http://localhost:3000/imoveis/${idImovel}/imagens`,
+          `${API_URL}/imoveis/${idImovel}/imagens`,
           {
             method: "POST",
             body: formData,
@@ -218,10 +220,9 @@ export default function NovoImovel() {
                     Comercial
                   </option>
 
-                <option value="Sobrado">
+                  <option value="Sobrado">
                     Sobrado
                   </option>
-
                 </select>
               </div>
 
