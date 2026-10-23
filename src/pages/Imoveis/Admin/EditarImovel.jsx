@@ -76,7 +76,7 @@ export default function EditarImovel() {
       setErro("");
 
       const resposta = await fetch(
-        `http://localhost:3000/imoveis/${id}`,
+  `https://castellari-imoveis.onrender.com/imoveis/${id}`,
         {
           method: "PUT",
           headers: {

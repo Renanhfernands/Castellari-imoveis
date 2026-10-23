@@ -78,8 +78,8 @@ export default function ImovelDetalhes() {
     }
 
     if (url.startsWith("/uploads/")) {
-      return `http://localhost:3000${url}`;
-    }
+  return `https://castellari-imoveis.onrender.com${url}`;
+}
 
     return url;
   }

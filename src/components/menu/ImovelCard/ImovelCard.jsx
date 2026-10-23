@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import "./ImovelCard.css";
 
+const API_URL = "https://castellari-imoveis.onrender.com";
+
 function ImovelCard({ imovel }) {
   const imagemCapa = imovel.imagens?.[0]?.url;
 
-const imagemCapaUrl =
-  imagemCapa?.startsWith("/uploads/")
-    ? `http://localhost:3000${imagemCapa}`
-    : imagemCapa;
+  const imagemCapaUrl =
+    imagemCapa?.startsWith("/uploads/")
+      ? `${API_URL}${imagemCapa}`
+      : imagemCapa;
 
   const precoFormatado =
     imovel.preco !== null && imovel.preco !== undefined
@@ -27,7 +29,10 @@ const imagemCapaUrl =
 
       <div className="imovel-image">
         {imagemCapa && (
-          <img src={imagemCapaUrl} alt={imovel.titulo} />
+          <img
+            src={imagemCapaUrl}
+            alt={imovel.titulo}
+          />
         )}
       </div>
 
