@@ -23,11 +23,15 @@ export default function NovoImovel() {
   });
 
   // =========================
-  // IMAGENS
+  // IMAGEM DE CAPA
   // =========================
 
   const [imagemCapa, setImagemCapa] = useState(null);
   const [previewCapa, setPreviewCapa] = useState("");
+
+  // =========================
+  // IMAGENS DO CARROSSEL
+  // =========================
 
   const [imagensCarrossel, setImagensCarrossel] = useState([]);
   const [previewsCarrossel, setPreviewsCarrossel] = useState([]);
@@ -36,11 +40,89 @@ export default function NovoImovel() {
   const [erro, setErro] = useState("");
 
   // =========================
-  // CAMPOS DO FORMULÁRIO
+  // FORMATAÇÃO DO PREÇO
+  // =========================
+
+  function formatarPreco(valor) {
+    if (!valor) {
+      return "";
+    }
+
+    // Remove tudo que não seja número ou vírgula
+    let valorLimpo = valor.replace(/[^\d,]/g, "");
+
+    const partes = valorLimpo.split(",");
+
+    let parteInteira = partes[0] || "";
+    let parteDecimal = partes[1] || "";
+
+    // Máximo de 2 casas decimais
+    parteDecimal = parteDecimal.slice(0, 2);
+
+    // Remove zeros à esquerda
+    if (parteInteira) {
+      parteInteira = parteInteira.replace(/^0+(?=\d)/, "");
+    }
+
+    // Adiciona separador de milhares
+    if (parteInteira) {
+      parteInteira = parteInteira.replace(
+        /\B(?=(\d{3})+(?!\d))/g,
+        "."
+      );
+    }
+
+    if (valorLimpo.includes(",")) {
+      return `${parteInteira || "0"},${parteDecimal}`;
+    }
+
+    return parteInteira;
+  }
+
+  function converterPrecoParaNumero(valor) {
+    if (!valor) {
+      return 0;
+    }
+
+    let valorLimpo = String(valor).trim();
+
+    // Remove R$ e espaços
+    valorLimpo = valorLimpo.replace(/[R$\s]/g, "");
+
+    // Exemplo:
+    // 335.000,50
+    // vira 335000.50
+    if (valorLimpo.includes(",")) {
+      valorLimpo = valorLimpo
+        .replace(/\./g, "")
+        .replace(",", ".");
+
+      return Number(valorLimpo);
+    }
+
+    // Exemplo:
+    // 335.000
+    // vira 335000
+    valorLimpo = valorLimpo.replace(/\./g, "");
+
+    return Number(valorLimpo);
+  }
+
+  // =========================
+  // ALTERAÇÃO DOS CAMPOS
   // =========================
 
   function handleChange(event) {
     const { name, value } = event.target;
+
+    if (name === "preco") {
+      setFormulario((anterior) => ({
+        ...anterior,
+        preco: formatarPreco(value),
+      }));
+
+      return;
+    }
 
     setFormulario((anterior) => ({
       ...anterior,
@@ -62,9 +144,11 @@ export default function NovoImovel() {
     }
 
     setErro("");
+
     setImagemCapa(arquivo);
 
     const preview = URL.createObjectURL(arquivo);
+
     setPreviewCapa(preview);
   }
 
@@ -76,14 +160,20 @@ export default function NovoImovel() {
     const arquivos = Array.from(event.target.files || []);
 
     if (arquivos.length > 20) {
-      setErro("Você pode selecionar no máximo 20 imagens para o carrossel.");
+      setErro(
+        "Você pode selecionar no máximo 20 imagens para o carrossel."
+      );
+
       event.target.value = "";
+
       setImagensCarrossel([]);
       setPreviewsCarrossel([]);
+
       return;
     }
 
     setErro("");
+
     setImagensCarrossel(arquivos);
 
     const novosPreviews = arquivos.map((arquivo) =>
@@ -94,7 +184,7 @@ export default function NovoImovel() {
   }
 
   // =========================
-  // LIMPEZA DOS PREVIEWS
+  // LIMPAR PREVIEW DA CAPA
   // =========================
 
   useEffect(() => {
@@ -105,6 +195,10 @@ export default function NovoImovel() {
     };
   }, [previewCapa]);
 
+  // =========================
+  // LIMPAR PREVIEWS DO CARROSSEL
+  // =========================
+
   useEffect(() => {
     return () => {
       previewsCarrossel.forEach((preview) => {
@@ -114,7 +208,7 @@ export default function NovoImovel() {
   }, [previewsCarrossel]);
 
   // =========================
-  // ENVIO
+  // CADASTRAR IMÓVEL
   // =========================
 
   async function handleSubmit(event) {
@@ -125,114 +219,151 @@ export default function NovoImovel() {
       setErro("");
 
       // =========================
-      // VALIDAÇÕES
+      // VALIDAÇÃO DA CAPA
       // =========================
 
       if (!imagemCapa) {
-        throw new Error("Selecione uma foto de capa para o imóvel.");
+        throw new Error(
+          "Selecione uma foto de capa para o imóvel."
+        );
       }
 
       // =========================
-      // 1. CADASTRA O IMÓVEL
+      // CONVERTER PREÇO
       // =========================
 
-      const resposta = await fetch(`${API_URL}/imoveis`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          tipo: formulario.tipo,
-          titulo: formulario.titulo,
-          localizacao: formulario.localizacao,
-          preco: Number(formulario.preco),
+      const precoNumerico =
+        converterPrecoParaNumero(formulario.preco);
 
-          quartos: formulario.quartos
-            ? Number(formulario.quartos)
-            : null,
+      if (!precoNumerico || precoNumerico <= 0) {
+        throw new Error(
+          "Informe um preço válido para o imóvel."
+        );
+      }
 
-          suites: formulario.suites
-            ? Number(formulario.suites)
-            : null,
+      // =========================
+      // CADASTRAR IMÓVEL
+      // =========================
 
-          sala: formulario.sala
-            ? Number(formulario.sala)
-            : null,
+      const resposta = await fetch(
+        `${API_URL}/imoveis`,
+        {
+          method: "POST",
 
-          banheiros: formulario.banheiros
-            ? Number(formulario.banheiros)
-            : null,
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-          vagas: formulario.vagas
-            ? Number(formulario.vagas)
-            : null,
+          body: JSON.stringify({
+            tipo: formulario.tipo,
 
-          area: formulario.area
-            ? Number(formulario.area)
-            : null,
+            titulo: formulario.titulo,
 
-          descricao: formulario.descricao || null,
-          video: formulario.video || null,
-        }),
-      });
+            localizacao: formulario.localizacao,
+
+            // IMPORTANTE:
+            // 335.000 -> 335000
+            preco: precoNumerico,
+
+            quartos: formulario.quartos
+              ? Number(formulario.quartos)
+              : null,
+
+            suites: formulario.suites
+              ? Number(formulario.suites)
+              : null,
+
+            sala: formulario.sala
+              ? Number(formulario.sala)
+              : null,
+
+            banheiros: formulario.banheiros
+              ? Number(formulario.banheiros)
+              : null,
+
+            vagas: formulario.vagas
+              ? Number(formulario.vagas)
+              : null,
+
+            area: formulario.area
+              ? Number(formulario.area)
+              : null,
+
+            descricao:
+              formulario.descricao || null,
+
+            video:
+              formulario.video || null,
+          }),
+        }
+      );
 
       const dados = await resposta.json();
 
       if (!resposta.ok) {
         throw new Error(
-          dados.erro || "Não foi possível cadastrar o imóvel."
+          dados.erro ||
+            "Não foi possível cadastrar o imóvel."
         );
       }
 
       const idImovel = dados.id;
 
       // =========================
-      // 2. ENVIA FOTO DE CAPA
+      // ENVIAR FOTO DE CAPA
       // =========================
 
-      if (imagemCapa) {
-        const formDataCapa = new FormData();
+      const formDataCapa = new FormData();
 
-        formDataCapa.append("imagemCapa", imagemCapa);
+      formDataCapa.append(
+        "imagemCapa",
+        imagemCapa
+      );
 
-        const respostaCapa = await fetch(
-          `${API_URL}/imoveis/${idImovel}/imagem-capa`,
-          {
-            method: "POST",
-            body: formDataCapa,
-          }
-        );
-
-        const dadosCapa = await respostaCapa.json();
-
-        if (!respostaCapa.ok) {
-          throw new Error(
-            dadosCapa.erro ||
-              "O imóvel foi cadastrado, mas não foi possível enviar a foto de capa."
-          );
+      const respostaCapa = await fetch(
+        `${API_URL}/imoveis/${idImovel}/imagem-capa`,
+        {
+          method: "POST",
+          body: formDataCapa,
         }
+      );
+
+      const dadosCapa =
+        await respostaCapa.json();
+
+      if (!respostaCapa.ok) {
+        throw new Error(
+          dadosCapa.erro ||
+            "O imóvel foi cadastrado, mas não foi possível enviar a foto de capa."
+        );
       }
 
       // =========================
-      // 3. ENVIA IMAGENS DO CARROSSEL
+      // ENVIAR IMAGENS DO CARROSSEL
       // =========================
 
       if (imagensCarrossel.length > 0) {
-        const formDataCarrossel = new FormData();
+        const formDataCarrossel =
+          new FormData();
 
         imagensCarrossel.forEach((imagem) => {
-          formDataCarrossel.append("imagens", imagem);
+          formDataCarrossel.append(
+            "imagens",
+            imagem
+          );
         });
 
-        const respostaCarrossel = await fetch(
-          `${API_URL}/imoveis/${idImovel}/imagens`,
-          {
-            method: "POST",
-            body: formDataCarrossel,
-          }
-        );
+        const respostaCarrossel =
+          await fetch(
+            `${API_URL}/imoveis/${idImovel}/imagens`,
+            {
+              method: "POST",
+              body: formDataCarrossel,
+            }
+          );
 
-        const dadosCarrossel = await respostaCarrossel.json();
+        const dadosCarrossel =
+          await respostaCarrossel.json();
 
         if (!respostaCarrossel.ok) {
           throw new Error(
@@ -242,36 +373,62 @@ export default function NovoImovel() {
         }
       }
 
-      alert("Imóvel cadastrado com sucesso!");
+      // =========================
+      // FINALIZADO
+      // =========================
+
+      alert(
+        "Imóvel cadastrado com sucesso!"
+      );
 
       navigate("/admin");
+
     } catch (error) {
-      console.error("Erro ao cadastrar imóvel:", error);
+      console.error(
+        "Erro ao cadastrar imóvel:",
+        error
+      );
+
       setErro(error.message);
+
     } finally {
       setSalvando(false);
     }
   }
 
   // =========================
-  // RENDER
+  // TELA
   // =========================
 
   return (
     <main className="novo-imovel">
+
       <div className="novo-imovel-container">
 
+        {/* =========================
+            CABEÇALHO
+        ========================= */}
+
         <div className="novo-imovel-header">
+
           <span className="admin-label">
             ADMINISTRAÇÃO
           </span>
 
-          <h1>Novo imóvel</h1>
+          <h1>
+            Novo imóvel
+          </h1>
 
           <p>
-            Preencha as informações do imóvel para cadastrá-lo.
+            Preencha as informações do imóvel
+            para cadastrá-lo.
           </p>
+
         </div>
+
+        {/* =========================
+            FORMULÁRIO
+        ========================= */}
 
         <form
           className="novo-imovel-form"
@@ -283,11 +440,17 @@ export default function NovoImovel() {
           ========================= */}
 
           <section className="form-section">
-            <h2>Informações básicas</h2>
+
+            <h2>
+              Informações básicas
+            </h2>
 
             <div className="form-grid">
 
+              {/* TIPO */}
+
               <div className="form-group">
+
                 <label htmlFor="tipo">
                   Tipo *
                 </label>
@@ -299,6 +462,7 @@ export default function NovoImovel() {
                   onChange={handleChange}
                   required
                 >
+
                   <option value="">
                     Selecione
                   </option>
@@ -322,10 +486,15 @@ export default function NovoImovel() {
                   <option value="Sobrado">
                     Sobrado
                   </option>
+
                 </select>
+
               </div>
 
+              {/* PREÇO */}
+
               <div className="form-group">
+
                 <label htmlFor="preco">
                   Preço *
                 </label>
@@ -333,17 +502,25 @@ export default function NovoImovel() {
                 <input
                   id="preco"
                   name="preco"
-                  type="number"
-                  min="0"
-                  step="0.01"
+                  type="text"
+                  inputMode="decimal"
                   value={formulario.preco}
                   onChange={handleChange}
-                  placeholder="Ex: 46000"
+                  placeholder="Ex: 335.000"
                   required
                 />
+
+                <small>
+                  Digite o valor em reais.
+                  Exemplo: 335000 = R$ 335.000,00
+                </small>
+
               </div>
 
+              {/* TÍTULO */}
+
               <div className="form-group form-group-full">
+
                 <label htmlFor="titulo">
                   Título *
                 </label>
@@ -357,9 +534,13 @@ export default function NovoImovel() {
                   placeholder="Ex: Apartamento à venda em Francisco Morato"
                   required
                 />
+
               </div>
 
+              {/* LOCALIZAÇÃO */}
+
               <div className="form-group form-group-full">
+
                 <label htmlFor="localizacao">
                   Localização *
                 </label>
@@ -373,9 +554,13 @@ export default function NovoImovel() {
                   placeholder="Ex: São Paulo - Francisco Morato"
                   required
                 />
+
               </div>
 
+              {/* ÁREA */}
+
               <div className="form-group">
+
                 <label htmlFor="area">
                   Área (m²)
                 </label>
@@ -390,9 +575,11 @@ export default function NovoImovel() {
                   onChange={handleChange}
                   placeholder="Ex: 80"
                 />
+
               </div>
 
             </div>
+
           </section>
 
           {/* =========================
@@ -400,11 +587,17 @@ export default function NovoImovel() {
           ========================= */}
 
           <section className="form-section">
-            <h2>Características</h2>
+
+            <h2>
+              Características
+            </h2>
 
             <div className="form-grid">
 
+              {/* QUARTOS */}
+
               <div className="form-group">
+
                 <label htmlFor="quartos">
                   Quartos
                 </label>
@@ -417,9 +610,13 @@ export default function NovoImovel() {
                   value={formulario.quartos}
                   onChange={handleChange}
                 />
+
               </div>
 
+              {/* SUÍTES */}
+
               <div className="form-group">
+
                 <label htmlFor="suites">
                   Suítes
                 </label>
@@ -432,9 +629,13 @@ export default function NovoImovel() {
                   value={formulario.suites}
                   onChange={handleChange}
                 />
+
               </div>
 
+              {/* SALAS */}
+
               <div className="form-group">
+
                 <label htmlFor="sala">
                   Salas
                 </label>
@@ -447,9 +648,13 @@ export default function NovoImovel() {
                   value={formulario.sala}
                   onChange={handleChange}
                 />
+
               </div>
 
+              {/* BANHEIROS */}
+
               <div className="form-group">
+
                 <label htmlFor="banheiros">
                   Banheiros
                 </label>
@@ -462,9 +667,13 @@ export default function NovoImovel() {
                   value={formulario.banheiros}
                   onChange={handleChange}
                 />
+
               </div>
 
+              {/* VAGAS */}
+
               <div className="form-group">
+
                 <label htmlFor="vagas">
                   Vagas
                 </label>
@@ -477,9 +686,11 @@ export default function NovoImovel() {
                   value={formulario.vagas}
                   onChange={handleChange}
                 />
+
               </div>
 
             </div>
+
           </section>
 
           {/* =========================
@@ -487,11 +698,17 @@ export default function NovoImovel() {
           ========================= */}
 
           <section className="form-section">
-            <h2>Imagens do imóvel</h2>
 
-            {/* FOTO DE CAPA */}
+            <h2>
+              Imagens do imóvel
+            </h2>
+
+            {/* =========================
+                FOTO DE CAPA
+            ========================= */}
 
             <div className="form-group">
+
               <label htmlFor="imagemCapa">
                 Foto de Capa
               </label>
@@ -500,17 +717,22 @@ export default function NovoImovel() {
                 id="imagemCapa"
                 type="file"
                 accept="image/*"
-                onChange={handleImagemCapaChange}
+                onChange={
+                  handleImagemCapaChange
+                }
               />
 
               <p>
-                Selecione uma única imagem para ser usada como
-                capa do imóvel no card.
+                Selecione uma única imagem
+                para ser usada como capa
+                do imóvel no card.
               </p>
 
               {previewCapa && (
                 <div className="imagens-preview">
+
                   <div className="imagem-preview-item">
+
                     <img
                       src={previewCapa}
                       alt="Prévia da capa"
@@ -519,14 +741,20 @@ export default function NovoImovel() {
                     <span>
                       Capa do Card
                     </span>
+
                   </div>
+
                 </div>
               )}
+
             </div>
 
-            {/* CARROSSEL */}
+            {/* =========================
+                CARROSSEL
+            ========================= */}
 
             <div className="form-group">
+
               <label htmlFor="imagensCarrossel">
                 Fotos do imóvel
               </label>
@@ -536,33 +764,41 @@ export default function NovoImovel() {
                 type="file"
                 accept="image/*"
                 multiple
-                onChange={handleImagensCarrosselChange}
+                onChange={
+                  handleImagensCarrosselChange
+                }
               />
 
               <p>
-                Selecione até 20 imagens para o carrossel
-                da página do imóvel.
+                Selecione até 20 imagens
+                para o carrossel da página
+                do imóvel.
               </p>
+
             </div>
 
             {previewsCarrossel.length > 0 && (
               <div className="imagens-preview">
 
-                {previewsCarrossel.map((preview, index) => (
-                  <div
-                    className="imagem-preview-item"
-                    key={`${preview}-${index}`}
-                  >
-                    <img
-                      src={preview}
-                      alt={`Prévia do carrossel ${index + 1}`}
-                    />
+                {previewsCarrossel.map(
+                  (preview, index) => (
+                    <div
+                      className="imagem-preview-item"
+                      key={`${preview}-${index}`}
+                    >
 
-                    <span>
-                      Carrossel {index + 1}
-                    </span>
-                  </div>
-                ))}
+                      <img
+                        src={preview}
+                        alt={`Prévia do carrossel ${index + 1}`}
+                      />
+
+                      <span>
+                        Carrossel {index + 1}
+                      </span>
+
+                    </div>
+                  )
+                )}
 
               </div>
             )}
@@ -574,9 +810,15 @@ export default function NovoImovel() {
           ========================= */}
 
           <section className="form-section">
-            <h2>Descrição e vídeo</h2>
+
+            <h2>
+              Descrição e vídeo
+            </h2>
+
+            {/* DESCRIÇÃO */}
 
             <div className="form-group">
+
               <label htmlFor="descricao">
                 Descrição
               </label>
@@ -589,9 +831,13 @@ export default function NovoImovel() {
                 onChange={handleChange}
                 placeholder="Digite a descrição do imóvel..."
               />
+
             </div>
 
+            {/* VÍDEO */}
+
             <div className="form-group">
+
               <label htmlFor="video">
                 Link do vídeo
               </label>
@@ -604,7 +850,9 @@ export default function NovoImovel() {
                 onChange={handleChange}
                 placeholder="https://..."
               />
+
             </div>
+
           </section>
 
           {/* =========================
@@ -618,7 +866,7 @@ export default function NovoImovel() {
           )}
 
           {/* =========================
-              AÇÕES
+              BOTÕES
           ========================= */}
 
           <div className="form-actions">
@@ -626,7 +874,9 @@ export default function NovoImovel() {
             <button
               type="button"
               className="button-cancelar"
-              onClick={() => navigate("/admin")}
+              onClick={() =>
+                navigate("/admin")
+              }
               disabled={salvando}
             >
               Cancelar
@@ -645,7 +895,9 @@ export default function NovoImovel() {
           </div>
 
         </form>
+
       </div>
+
     </main>
   );
 }
