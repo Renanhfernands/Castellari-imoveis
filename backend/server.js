@@ -22,6 +22,9 @@ if (!fs.existsSync(pastaUploads)) {
 
 app.use("/uploads", express.static(pastaUploads));
 
+console.log("📁 PASTA UPLOADS:", pastaUploads);
+console.log("🖼️ ARQUIVOS:", fs.readdirSync(pastaUploads).slice(0, 10));
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, pastaUploads);
