@@ -719,18 +719,6 @@ app.delete(
   }
 );
 
-// Remove as imagens do carrossel do banco
-await db.query(
-  "DELETE FROM imovel_imagens WHERE imovel_id = ?",
-  [id]
-);
-
-// Exclui o imóvel
-const [resultado] = await db.query(
-  "DELETE FROM imoveis WHERE id = ?",
-  [id]
-);
-
 // ==========================================
 // SERVIDOR
 // ==========================================

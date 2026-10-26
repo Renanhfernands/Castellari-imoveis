@@ -4,7 +4,8 @@ import "./ImovelCard.css";
 const API_URL = "https://castellari-imoveis.onrender.com";
 
 function ImovelCard({ imovel }) {
-  const imagemCapa = imovel.imagens?.[0]?.url;
+  // A imagem do CARD vem exclusivamente da imagem de capa
+  const imagemCapa = imovel.imagem_capa;
 
   const imagemCapaUrl =
     imagemCapa?.startsWith("/uploads/")
@@ -28,7 +29,7 @@ function ImovelCard({ imovel }) {
     <article className="imovel-card">
 
       <div className="imovel-image">
-        {imagemCapa && (
+        {imagemCapaUrl && (
           <img
             src={imagemCapaUrl}
             alt={imovel.titulo}
