@@ -446,7 +446,7 @@ app.post("/imoveis", async (req, res) => {
 });
 
 // ==========================================
-// UPLOAD DA FOTO DE CAPA
+// UPLOAD / SUBSTITUIÇÃO DA FOTO DE CAPA
 // ==========================================
 
 app.post(
@@ -474,9 +474,18 @@ app.post(
         });
       }
 
-      // Remove a capa antiga, caso exista
       const capaAntiga = imoveis[0].imagem_capa;
 
+      // Nova URL
+      const url = `/uploads/${req.file.filename}`;
+
+      // Primeiro salva a nova capa no banco
+      await db.query(
+        "UPDATE imoveis SET imagem_capa = ? WHERE id = ?",
+        [url, id]
+      );
+
+      // Depois tenta apagar a capa antiga
       if (capaAntiga) {
         const caminhoCapaAntiga = path.join(
           __dirname,
@@ -488,23 +497,14 @@ app.post(
         }
       }
 
-      // Nova URL
-      const url = `/uploads/${req.file.filename}`;
-
-      // Salva no banco
-      await db.query(
-        "UPDATE imoveis SET imagem_capa = ? WHERE id = ?",
-        [url, id]
-      );
-
       res.status(201).json({
-        mensagem: "Imagem de capa enviada com sucesso.",
+        mensagem: "Imagem de capa atualizada com sucesso.",
         url,
       });
     } catch (error) {
       console.error(error);
 
-      // Se deu erro depois do upload, tenta remover o arquivo
+      // Se deu erro, remove a nova imagem enviada
       if (req.file) {
         const caminhoArquivo = path.join(
           pastaUploads,
@@ -517,7 +517,65 @@ app.post(
       }
 
       res.status(500).json({
-        erro: "Não foi possível enviar a imagem de capa.",
+        erro: "Não foi possível atualizar a imagem de capa.",
+      });
+    }
+  }
+);
+
+// ==========================================
+// REMOVER FOTO DE CAPA
+// ==========================================
+
+app.delete(
+  "/imoveis/:id/imagem-capa",
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const [imoveis] = await db.query(
+        "SELECT id, imagem_capa FROM imoveis WHERE id = ?",
+        [id]
+      );
+
+      if (imoveis.length === 0) {
+        return res.status(404).json({
+          erro: "Imóvel não encontrado.",
+        });
+      }
+
+      const capa = imoveis[0].imagem_capa;
+
+      if (!capa) {
+        return res.status(404).json({
+          erro: "Este imóvel não possui imagem de capa.",
+        });
+      }
+
+      // Remove a referência no banco
+      await db.query(
+        "UPDATE imoveis SET imagem_capa = NULL WHERE id = ?",
+        [id]
+      );
+
+      // Remove o arquivo físico
+      const caminhoCapa = path.join(
+        __dirname,
+        capa
+      );
+
+      if (fs.existsSync(caminhoCapa)) {
+        fs.unlinkSync(caminhoCapa);
+      }
+
+      res.json({
+        mensagem: "Imagem de capa removida com sucesso.",
+      });
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        erro: "Não foi possível remover a imagem de capa.",
       });
     }
   }
@@ -601,6 +659,76 @@ app.post(
       });
     }
   }
+);
+
+// ==========================================
+// REMOVER IMAGEM DO CARROSSEL
+// ==========================================
+
+app.delete(
+  "/imoveis/:id/imagens/:imagemId",
+  async (req, res) => {
+    try {
+      const { id, imagemId } = req.params;
+
+      // Busca a imagem
+      const [imagens] = await db.query(
+        `SELECT id, url
+         FROM imovel_imagens
+         WHERE id = ? AND imovel_id = ?`,
+        [imagemId, id]
+      );
+
+      if (imagens.length === 0) {
+        return res.status(404).json({
+          erro: "Imagem não encontrada.",
+        });
+      }
+
+      const imagem = imagens[0];
+
+      // Remove do banco
+      await db.query(
+        `DELETE FROM imovel_imagens
+         WHERE id = ? AND imovel_id = ?`,
+        [imagemId, id]
+      );
+
+      // Remove o arquivo físico
+      if (imagem.url) {
+        const caminhoImagem = path.join(
+          __dirname,
+          imagem.url
+        );
+
+        if (fs.existsSync(caminhoImagem)) {
+          fs.unlinkSync(caminhoImagem);
+        }
+      }
+
+      res.json({
+        mensagem: "Imagem removida com sucesso.",
+      });
+    } catch (error) {
+      console.error(error);
+
+      res.status(500).json({
+        erro: "Não foi possível remover a imagem.",
+      });
+    }
+  }
+);
+
+// Remove as imagens do carrossel do banco
+await db.query(
+  "DELETE FROM imovel_imagens WHERE imovel_id = ?",
+  [id]
+);
+
+// Exclui o imóvel
+const [resultado] = await db.query(
+  "DELETE FROM imoveis WHERE id = ?",
+  [id]
 );
 
 // ==========================================
