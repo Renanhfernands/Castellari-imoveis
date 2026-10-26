@@ -386,8 +386,13 @@ export default function NovoImovel() {
 
             <div className="form-group">
               <label htmlFor="imagens">
-                Fotos do imóvel
+                Foto de Capa
               </label>
+              
+              <div ClassName="form-group">
+                <label htmlFor="imagens">
+                  Fotos do imóvel
+                </label>
 
               <input
                 id="imagens"
@@ -402,6 +407,7 @@ export default function NovoImovel() {
                 A primeira imagem será usada como capa
                 e as demais ficarão no carrossel.
               </p>
+              </div>
             </div>
 
             {previews.length > 0 && (
