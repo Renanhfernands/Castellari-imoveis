@@ -22,11 +22,22 @@ export default function NovoImovel() {
     video: "",
   });
 
-  const [imagens, setImagens] = useState([]);
-  const [previews, setPreviews] = useState([]);
+  // =========================
+  // IMAGENS
+  // =========================
+
+  const [imagemCapa, setImagemCapa] = useState(null);
+  const [previewCapa, setPreviewCapa] = useState("");
+
+  const [imagensCarrossel, setImagensCarrossel] = useState([]);
+  const [previewsCarrossel, setPreviewsCarrossel] = useState([]);
 
   const [salvando, setSalvando] = useState(false);
   const [erro, setErro] = useState("");
+
+  // =========================
+  // CAMPOS DO FORMULÁRIO
+  // =========================
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -37,34 +48,74 @@ export default function NovoImovel() {
     }));
   }
 
-  function handleImagensChange(event) {
-    const arquivos = Array.from(event.target.files);
+  // =========================
+  // FOTO DE CAPA
+  // =========================
 
-    if (arquivos.length > 20) {
-      setErro("Você pode selecionar no máximo 20 imagens.");
-      event.target.value = "";
-      setImagens([]);
-      setPreviews([]);
+  function handleImagemCapaChange(event) {
+    const arquivo = event.target.files?.[0];
+
+    if (!arquivo) {
+      setImagemCapa(null);
+      setPreviewCapa("");
       return;
     }
 
     setErro("");
-    setImagens(arquivos);
+    setImagemCapa(arquivo);
+
+    const preview = URL.createObjectURL(arquivo);
+    setPreviewCapa(preview);
+  }
+
+  // =========================
+  // FOTOS DO CARROSSEL
+  // =========================
+
+  function handleImagensCarrosselChange(event) {
+    const arquivos = Array.from(event.target.files || []);
+
+    if (arquivos.length > 20) {
+      setErro("Você pode selecionar no máximo 20 imagens para o carrossel.");
+      event.target.value = "";
+      setImagensCarrossel([]);
+      setPreviewsCarrossel([]);
+      return;
+    }
+
+    setErro("");
+    setImagensCarrossel(arquivos);
 
     const novosPreviews = arquivos.map((arquivo) =>
       URL.createObjectURL(arquivo)
     );
 
-    setPreviews(novosPreviews);
+    setPreviewsCarrossel(novosPreviews);
   }
+
+  // =========================
+  // LIMPEZA DOS PREVIEWS
+  // =========================
 
   useEffect(() => {
     return () => {
-      previews.forEach((preview) => {
+      if (previewCapa) {
+        URL.revokeObjectURL(previewCapa);
+      }
+    };
+  }, [previewCapa]);
+
+  useEffect(() => {
+    return () => {
+      previewsCarrossel.forEach((preview) => {
         URL.revokeObjectURL(preview);
       });
     };
-  }, [previews]);
+  }, [previewsCarrossel]);
+
+  // =========================
+  // ENVIO
+  // =========================
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -73,7 +124,18 @@ export default function NovoImovel() {
       setSalvando(true);
       setErro("");
 
-      // 1. Cadastra o imóvel
+      // =========================
+      // VALIDAÇÕES
+      // =========================
+
+      if (!imagemCapa) {
+        throw new Error("Selecione uma foto de capa para o imóvel.");
+      }
+
+      // =========================
+      // 1. CADASTRA O IMÓVEL
+      // =========================
+
       const resposta = await fetch(`${API_URL}/imoveis`, {
         method: "POST",
         headers: {
@@ -124,28 +186,58 @@ export default function NovoImovel() {
 
       const idImovel = dados.id;
 
-      // 2. Se houver imagens, envia para o imóvel recém-criado
-      if (imagens.length > 0) {
-        const formData = new FormData();
+      // =========================
+      // 2. ENVIA FOTO DE CAPA
+      // =========================
 
-        imagens.forEach((imagem) => {
-          formData.append("imagens", imagem);
-        });
+      if (imagemCapa) {
+        const formDataCapa = new FormData();
 
-        const respostaImagens = await fetch(
-          `${API_URL}/imoveis/${idImovel}/imagens`,
+        formDataCapa.append("imagemCapa", imagemCapa);
+
+        const respostaCapa = await fetch(
+          `${API_URL}/imoveis/${idImovel}/imagem-capa`,
           {
             method: "POST",
-            body: formData,
+            body: formDataCapa,
           }
         );
 
-        const dadosImagens = await respostaImagens.json();
+        const dadosCapa = await respostaCapa.json();
 
-        if (!respostaImagens.ok) {
+        if (!respostaCapa.ok) {
           throw new Error(
-            dadosImagens.erro ||
-              "O imóvel foi cadastrado, mas não foi possível enviar as imagens."
+            dadosCapa.erro ||
+              "O imóvel foi cadastrado, mas não foi possível enviar a foto de capa."
+          );
+        }
+      }
+
+      // =========================
+      // 3. ENVIA IMAGENS DO CARROSSEL
+      // =========================
+
+      if (imagensCarrossel.length > 0) {
+        const formDataCarrossel = new FormData();
+
+        imagensCarrossel.forEach((imagem) => {
+          formDataCarrossel.append("imagens", imagem);
+        });
+
+        const respostaCarrossel = await fetch(
+          `${API_URL}/imoveis/${idImovel}/imagens`,
+          {
+            method: "POST",
+            body: formDataCarrossel,
+          }
+        );
+
+        const dadosCarrossel = await respostaCarrossel.json();
+
+        if (!respostaCarrossel.ok) {
+          throw new Error(
+            dadosCarrossel.erro ||
+              "O imóvel foi cadastrado, mas não foi possível enviar as imagens do carrossel."
           );
         }
       }
@@ -160,6 +252,10 @@ export default function NovoImovel() {
       setSalvando(false);
     }
   }
+
+  // =========================
+  // RENDER
+  // =========================
 
   return (
     <main className="novo-imovel">
@@ -182,7 +278,10 @@ export default function NovoImovel() {
           onSubmit={handleSubmit}
         >
 
-          {/* INFORMAÇÕES BÁSICAS */}
+          {/* =========================
+              INFORMAÇÕES BÁSICAS
+          ========================= */}
+
           <section className="form-section">
             <h2>Informações básicas</h2>
 
@@ -296,7 +395,10 @@ export default function NovoImovel() {
             </div>
           </section>
 
-          {/* CARACTERÍSTICAS */}
+          {/* =========================
+              CARACTERÍSTICAS
+          ========================= */}
+
           <section className="form-section">
             <h2>Características</h2>
 
@@ -380,62 +482,97 @@ export default function NovoImovel() {
             </div>
           </section>
 
-          {/* IMAGENS */}
+          {/* =========================
+              IMAGENS
+          ========================= */}
+
           <section className="form-section">
             <h2>Imagens do imóvel</h2>
 
+            {/* FOTO DE CAPA */}
+
             <div className="form-group">
-              <label htmlFor="imagens">
+              <label htmlFor="imagemCapa">
                 Foto de Capa
               </label>
-              
-              <div ClassName="form-group">
-                <label htmlFor="imagens">
-                  Fotos do imóvel
-                </label>
 
               <input
-                id="imagens"
+                id="imagemCapa"
                 type="file"
                 accept="image/*"
-                multiple
-                onChange={handleImagensChange}
+                onChange={handleImagemCapaChange}
               />
 
               <p>
-                Selecione até 20 imagens.
-                A primeira imagem será usada como capa
-                e as demais ficarão no carrossel.
+                Selecione uma única imagem para ser usada como
+                capa do imóvel no card.
               </p>
-              </div>
+
+              {previewCapa && (
+                <div className="imagens-preview">
+                  <div className="imagem-preview-item">
+                    <img
+                      src={previewCapa}
+                      alt="Prévia da capa"
+                    />
+
+                    <span>
+                      Capa do Card
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
 
-            {previews.length > 0 && (
+            {/* CARROSSEL */}
+
+            <div className="form-group">
+              <label htmlFor="imagensCarrossel">
+                Fotos do imóvel
+              </label>
+
+              <input
+                id="imagensCarrossel"
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleImagensCarrosselChange}
+              />
+
+              <p>
+                Selecione até 20 imagens para o carrossel
+                da página do imóvel.
+              </p>
+            </div>
+
+            {previewsCarrossel.length > 0 && (
               <div className="imagens-preview">
 
-                {previews.map((preview, index) => (
+                {previewsCarrossel.map((preview, index) => (
                   <div
                     className="imagem-preview-item"
                     key={`${preview}-${index}`}
                   >
                     <img
                       src={preview}
-                      alt={`Prévia ${index + 1}`}
+                      alt={`Prévia do carrossel ${index + 1}`}
                     />
 
                     <span>
-                      {index === 0
-                        ? "Capa"
-                        : `Carrossel ${index}`}
+                      Carrossel {index + 1}
                     </span>
                   </div>
                 ))}
 
               </div>
             )}
+
           </section>
 
-          {/* DESCRIÇÃO E VÍDEO */}
+          {/* =========================
+              DESCRIÇÃO E VÍDEO
+          ========================= */}
+
           <section className="form-section">
             <h2>Descrição e vídeo</h2>
 
@@ -470,14 +607,20 @@ export default function NovoImovel() {
             </div>
           </section>
 
-          {/* ERRO */}
+          {/* =========================
+              ERRO
+          ========================= */}
+
           {erro && (
             <div className="form-erro">
               {erro}
             </div>
           )}
 
-          {/* AÇÕES */}
+          {/* =========================
+              AÇÕES
+          ========================= */}
+
           <div className="form-actions">
 
             <button
