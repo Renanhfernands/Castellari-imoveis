@@ -1,175 +1,664 @@
+/* =========================================================
+   CASTELLARI IMÓVEIS
+   Página de imóveis
+   Responsivo: desktop / tablet / mobile
+========================================================= */
+
 .imoveis-page {
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+
   background: #171711;
   color: #f3eee4;
+
   font-family: Arial, sans-serif;
 }
 
-/* HEADER */
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .imoveis-header {
-  height: 64px;
-  padding: 0 42px;
+  width: 100%;
+  min-height: 72px;
+  box-sizing: border-box;
+
+  padding: 0 clamp(20px, 4vw, 60px);
+
   border-bottom: 1px solid #2e2b23;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 30px;
 }
 
+
+/* LOGO */
+
 .logo {
+  min-width: 0;
+
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 
   color: #f3eee4;
 
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 20px;
+  font-size: clamp(15px, 1.3vw, 20px);
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: clamp(1px, 0.15vw, 2px);
+
+  white-space: nowrap;
 }
 
 .logo-castelo {
-  width: 50px;
-  height: 34px;
+  width: 48px;
+  height: 36px;
+
   display: block;
+
   flex-shrink: 0;
 }
 
+
+/* NAVEGAÇÃO */
+
 .imoveis-header nav {
   display: flex;
-  gap: 38px;
+  align-items: center;
+  justify-content: center;
+
+  gap: clamp(20px, 2.8vw, 42px);
+
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .imoveis-header nav a {
+  position: relative;
+
   color: #c9c4b8;
   text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 1.5px;
-}
 
-.imoveis-header button {
-  background: transparent;
-  border: 1px solid #c9a45f;
-  color: #f3eee4;
-  padding: 11px 20px;
   font-size: 11px;
   letter-spacing: 1.5px;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
 }
 
-/* CONTEÚDO */
+.imoveis-header nav a::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+
+  width: 0;
+  height: 1px;
+
+  background: #c9a45f;
+
+  transition: width 0.25s ease;
+}
+
+.imoveis-header nav a:hover {
+  color: #f3eee4;
+}
+
+.imoveis-header nav a:hover::after {
+  width: 100%;
+}
+
+
+/* BOTÃO */
+
+.imoveis-header button {
+  flex-shrink: 0;
+
+  background: transparent;
+
+  border: 1px solid #c9a45f;
+
+  color: #f3eee4;
+
+  padding: 11px 18px;
+
+  font-size: 10px;
+  letter-spacing: 1.4px;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.imoveis-header button:hover {
+  background: #c9a45f;
+  color: #171711;
+}
+
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
 
 .imoveis-content {
-  padding: 75px 7%;
+  width: min(1400px, 100%);
+  box-sizing: border-box;
+
+  margin: 0 auto;
+
+  padding:
+    clamp(55px, 7vw, 100px)
+    clamp(20px, 6vw, 85px)
+    clamp(70px, 8vw, 120px);
 }
 
+
+/* =========================================================
+   INTRO
+========================================================= */
+
 .imoveis-intro {
-  max-width: 700px;
-  margin-bottom: 65px;
+  width: 100%;
+  max-width: 760px;
+
+  margin-bottom: clamp(45px, 6vw, 75px);
 }
 
 .eyebrow {
+  display: inline-block;
+
   color: #c9a45f;
-  font-size: 11px;
+
+  font-size: 10px;
+  font-weight: 600;
+
   letter-spacing: 3px;
+  line-height: 1.4;
 }
 
 .imoveis-intro h1 {
-  font-family: Georgia, serif;
-  font-size: 58px;
-  line-height: 1.05;
+  margin: 20px 0 24px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(40px, 5.2vw, 70px);
+  line-height: 1.03;
+
   font-weight: normal;
-  margin: 22px 0;
+
+  letter-spacing: -1.5px;
 }
 
 .imoveis-intro h1 em {
   color: #c9a45f;
+
   font-weight: normal;
 }
 
 .imoveis-intro p {
-  max-width: 520px;
+  width: 100%;
+  max-width: 550px;
+
+  margin: 0;
+
   color: #aaa79d;
-  font-size: 16px;
+
+  font-size: clamp(14px, 1.2vw, 16px);
   line-height: 1.8;
 }
 
-/* GRID */
+
+/* =========================================================
+   GRID
+========================================================= */
 
 .imoveis-grid {
+  width: 100%;
+
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: clamp(18px, 2.5vw, 32px);
+
+  align-items: start;
 }
+
+
+/* =========================================================
+   CARD
+========================================================= */
 
 .imovel-card {
+  min-width: 0;
+
+  overflow: hidden;
+
   border: 1px solid #37342b;
+
   background: #1d1c16;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
 }
 
+.imovel-card:hover {
+  transform: translateY(-4px);
+
+  border-color: #665637;
+}
+
+
+/* =========================================================
+   IMAGEM
+========================================================= */
+
 .imovel-image {
-  height: 350px;
+  width: 100%;
+  height: clamp(260px, 28vw, 390px);
+
+  overflow: hidden;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   color: #777267;
+
   background: #24231c;
+
   letter-spacing: 2px;
-  font-size: 11px;
+  font-size: 10px;
 }
 
+
+/* Caso o card tenha uma imagem real */
+
+.imovel-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.6s ease;
+}
+
+.imovel-card:hover .imovel-image img {
+  transform: scale(1.025);
+}
+
+
+/* =========================================================
+   INFORMAÇÕES DO CARD
+========================================================= */
+
 .imovel-info {
-  padding: 28px;
+  min-width: 0;
+
+  padding: clamp(20px, 2.5vw, 30px);
 }
 
 .imovel-info > span {
+  display: block;
+
   color: #c9a45f;
-  font-size: 10px;
+
+  font-size: 9px;
+  font-weight: 600;
+
   letter-spacing: 2px;
+
+  line-height: 1.5;
 }
 
 .imovel-info h2 {
-  font-family: Georgia, serif;
-  font-size: 28px;
+  margin: 10px 0 10px;
+
+  color: #f3eee4;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(22px, 2.2vw, 30px);
+
+  line-height: 1.15;
+
   font-weight: normal;
-  margin: 12px 0;
+
+  overflow-wrap: break-word;
 }
 
 .imovel-info p {
+  margin: 0;
+
   color: #99958b;
-  font-size: 14px;
+
+  font-size: 13px;
+  line-height: 1.6;
+
+  overflow-wrap: break-word;
 }
 
 .imovel-info strong {
   display: block;
-  margin-top: 22px;
+
+  margin-top: 20px;
+
   color: #f3eee4;
-  font-size: 18px;
+
+  font-size: clamp(16px, 1.4vw, 19px);
+
+  line-height: 1.3;
 }
 
-/* RESPONSIVO */
 
-@media (max-width: 900px) {
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .imoveis-header {
+    gap: 20px;
+  }
+
+  .imoveis-header nav {
+    gap: 20px;
+  }
+
+  .imoveis-header nav a {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+  }
+
+  .imoveis-header button {
+    padding: 10px 14px;
+    font-size: 9px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET / MOBILE GRANDE
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .imoveis-header {
+    min-height: 68px;
+
+    padding:
+      12px
+      24px;
+  }
+
+  /*
+    O menu principal some para evitar que
+    os elementos fiquem espremidos.
+  */
+
   .imoveis-header nav {
     display: none;
   }
 
-  .imoveis-header {
-    padding: 0 20px;
+  .imoveis-header button {
+    padding: 10px 14px;
   }
 
   .imoveis-content {
-    padding: 50px 25px;
-  }
-
-  .imoveis-intro h1 {
-    font-size: 42px;
+    padding:
+      55px
+      28px
+      80px;
   }
 
   .imoveis-grid {
     grid-template-columns: 1fr;
+
+    gap: 24px;
   }
+
+  .imovel-image {
+    height: min(58vw, 420px);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .imoveis-page {
+    min-height: 100vh;
+  }
+
+
+  /* HEADER */
+
+  .imoveis-header {
+    min-height: 64px;
+
+    padding:
+      10px 18px;
+
+    gap: 12px;
+  }
+
+  .logo {
+    gap: 8px;
+
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .logo-castelo {
+    width: 39px;
+    height: 31px;
+  }
+
+  .imoveis-header button {
+    padding: 9px 11px;
+
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+
+  /* CONTEÚDO */
+
+  .imoveis-content {
+    padding:
+      48px
+      18px
+      65px;
+  }
+
+
+  /* INTRO */
+
+  .imoveis-intro {
+    margin-bottom: 42px;
+  }
+
+  .eyebrow {
+    font-size: 8px;
+    letter-spacing: 2.2px;
+  }
+
+  .imoveis-intro h1 {
+    margin:
+      16px 0
+      20px;
+
+    font-size: clamp(37px, 11vw, 52px);
+
+    line-height: 1.02;
+
+    letter-spacing: -1px;
+  }
+
+  .imoveis-intro p {
+    max-width: 100%;
+
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+
+  /* GRID */
+
+  .imoveis-grid {
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 20px;
+  }
+
+
+  /* CARD */
+
+  .imovel-card {
+    width: 100%;
+  }
+
+  .imovel-image {
+    width: 100%;
+    height: 68vw;
+
+    min-height: 240px;
+    max-height: 360px;
+  }
+
+  .imovel-info {
+    padding: 20px;
+  }
+
+  .imovel-info > span {
+    font-size: 8px;
+    letter-spacing: 1.7px;
+  }
+
+  .imovel-info h2 {
+    margin:
+      9px 0
+      9px;
+
+    font-size: 25px;
+  }
+
+  .imovel-info p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .imovel-info strong {
+    margin-top: 17px;
+
+    font-size: 17px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE PEQUENO
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .imoveis-header {
+    padding:
+      9px 14px;
+  }
+
+  .logo {
+    font-size: 11px;
+  }
+
+  .logo-castelo {
+    width: 35px;
+    height: 28px;
+  }
+
+  .imoveis-header button {
+    padding: 8px 9px;
+
+    font-size: 7px;
+  }
+
+  .imoveis-content {
+    padding:
+      42px
+      14px
+      55px;
+  }
+
+  .imoveis-intro h1 {
+    font-size: 36px;
+  }
+
+  .imoveis-intro p {
+    font-size: 13px;
+  }
+
+  .imovel-info {
+    padding: 18px;
+  }
+
+  .imovel-info h2 {
+    font-size: 23px;
+  }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE / TOUCH
+========================================================= */
+
+@media (hover: none) {
+
+  .imovel-card:hover {
+    transform: none;
+  }
+
+  .imovel-card:hover .imovel-image img {
+    transform: none;
+  }
+
+}
+
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .imovel-card,
+  .imovel-image img,
+  .imoveis-header nav a,
+  .imoveis-header nav a::after,
+  .imoveis-header button {
+    transition: none;
+  }
+
 }
