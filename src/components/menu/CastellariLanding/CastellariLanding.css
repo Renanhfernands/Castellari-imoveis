@@ -163,39 +163,671 @@
 .castellari .section-head h2{font-size:clamp(28px,3vw,42px); max-width:560px; line-height:1.15;}
 .castellari .section-head p{max-width:340px; font-size:15px; line-height:1.65; color:#5c5644; font-weight:300;}
  
-/* ================= PROPERTIES ================= */
-.castellari .properties-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
-@media(max-width:960px){.castellari .properties-grid{grid-template-columns:1fr;}}
-.castellari .property-card{
-  background:var(--cream); border:1px solid var(--line);
+/* =========================================================
+   CURADORIA CASTELLARI
+   Editorial / Luxury / Architectural
+========================================================= */
+
+.castellari .castellari-curadoria{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(169,128,63,.08),
+      transparent 28%
+    ),
+    var(--stone);
+  padding-top:145px;
+  padding-bottom:150px;
 }
-.castellari .property-visual{
-  background:linear-gradient(160deg,var(--stone-3),var(--stone-2));
-  padding:26px 22px 18px; position:relative; border-bottom:1px solid var(--line);
+
+
+/* -----------------------------------------
+   ELEMENTO DECORATIVO DE FUNDO
+----------------------------------------- */
+
+.castellari .castellari-curadoria::before{
+  content:"CASTELLARI";
+  position:absolute;
+  right:-80px;
+  top:100px;
+
+  font-family:'Fraunces',serif;
+  font-size:clamp(120px,18vw,260px);
+  font-weight:500;
+  line-height:.8;
+
+  color:rgba(169,128,63,.045);
+
+  pointer-events:none;
+  white-space:nowrap;
+
+  transform:rotate(-8deg);
 }
-.castellari .property-visual svg{width:100%; height:150px;}
-.castellari .property-tag{
-  position:absolute; top:20px; right:20px;
-  font-size:10px; text-transform:uppercase; letter-spacing:0.08em;
-  background:var(--ink); color:var(--brass-light); padding:6px 10px;
+
+
+/* -----------------------------------------
+   CABEÇALHO
+----------------------------------------- */
+
+.castellari .castellari-curadoria .section-head{
+  position:relative;
+  z-index:2;
+
+  display:grid;
+  grid-template-columns:minmax(0,1.4fr) minmax(260px,.6fr);
+
+  align-items:end;
+
+  gap:80px;
+  margin-bottom:105px;
 }
-.castellari .property-body{padding:26px 24px 28px;}
-.castellari .property-body h3{font-size:21px; font-weight:500;}
-.castellari .property-loc{font-size:13px; color:#7a7259; margin-top:6px;}
-.castellari .property-specs{
-  display:flex; gap:18px; margin:20px 0; padding:16px 0;
-  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+
+
+.castellari .castellari-curadoria .section-head h2{
+  max-width:760px;
+  font-size:clamp(42px,5vw,72px);
+  line-height:.98;
+  letter-spacing:-.035em;
 }
-.castellari .property-specs .spec{font-size:12px;}
-.castellari .property-specs .spec .v{font-family:'IBM Plex Mono', monospace; font-size:14px; color:var(--ink-text); display:block;}
-.castellari .property-specs .spec .l{color:#8a8267; text-transform:uppercase; letter-spacing:0.05em; font-size:10px;}
-.castellari .property-price{
-  font-family:'IBM Plex Mono', monospace; font-size:19px; color:var(--brass);
+
+
+.castellari .castellari-curadoria .section-head h2 em{
+  color:var(--brass);
+  font-style:italic;
+  font-weight:400;
 }
-.castellari .property-cta{
-  margin-top:18px; font-size:12px; text-transform:uppercase; letter-spacing:0.08em;
-  display:inline-flex; align-items:center; gap:8px; color:var(--ink-text);
-  border-bottom:1px solid var(--ink-text); padding-bottom:3px;
+
+
+.castellari .castellari-curadoria .section-head p{
+  position:relative;
+  max-width:360px;
+
+  padding-left:28px;
+
+  font-size:15px;
+  line-height:1.8;
+}
+
+
+/* linha lateral */
+
+.castellari .castellari-curadoria .section-head p::before{
+  content:"";
+
+  position:absolute;
+  left:0;
+  top:5px;
+  bottom:5px;
+
+  width:1px;
+
+  background:var(--brass);
+}
+
+
+/* -----------------------------------------
+   INTRO EDITORIAL
+----------------------------------------- */
+
+.castellari .curadoria-intro{
+  position:relative;
+  z-index:2;
+
+  display:grid;
+  grid-template-columns:170px 1fr;
+
+  min-height:430px;
+
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+
+/* número gigante */
+
+.castellari .curadoria-intro-number{
+  position:relative;
+
+  display:flex;
+  align-items:flex-start;
+
+  padding-top:34px;
+
+  font-size:13px;
+  color:var(--brass);
+
+  letter-spacing:.08em;
+}
+
+
+.castellari .curadoria-intro-number::after{
+  content:"";
+
+  position:absolute;
+
+  left:2px;
+  top:70px;
+
+  width:55px;
+  height:1px;
+
+  background:var(--brass);
+}
+
+
+/* conteúdo */
+
+.castellari .curadoria-intro-content{
+  position:relative;
+
+  padding:
+    55px
+    clamp(30px,6vw,110px)
+    65px
+    0;
+}
+
+
+.castellari .curadoria-intro-content::before{
+  content:"";
+
+  position:absolute;
+
+  right:7%;
+  top:38px;
+
+  width:190px;
+  height:190px;
+
+  border:1px solid rgba(169,128,63,.25);
+
+  transform:rotate(45deg);
+
+  pointer-events:none;
+}
+
+
+.castellari .curadoria-intro-content::after{
+  content:"";
+
+  position:absolute;
+
+  right:calc(7% + 28px);
+  top:66px;
+
+  width:134px;
+  height:134px;
+
+  border:1px solid rgba(169,128,63,.16);
+
+  transform:rotate(45deg);
+
+  pointer-events:none;
+}
+
+
+.castellari .eyebrow-inline{
+  position:relative;
+  z-index:2;
+}
+
+
+.castellari .curadoria-intro-content h3{
+  position:relative;
+  z-index:2;
+
+  max-width:720px;
+
+  margin-top:22px;
+
+  font-size:clamp(34px,4vw,58px);
+  line-height:1.02;
+
+  letter-spacing:-.03em;
+}
+
+
+.castellari .curadoria-intro-content p{
+  position:relative;
+  z-index:2;
+
+  max-width:610px;
+
+  margin-top:25px;
+
+  font-size:15px;
+  line-height:1.8;
+
+  color:#5c5644;
+}
+
+
+.castellari .curadoria-intro-content p + p{
+  margin-top:12px;
+}
+
+
+/* -----------------------------------------
+   LINK
+----------------------------------------- */
+
+.castellari .curadoria-intro-content .property-cta{
+  position:relative;
+  z-index:3;
+
+  margin-top:32px;
+
+  transition:
+    gap .35s ease,
+    color .35s ease;
+}
+
+
+.castellari .curadoria-intro-content .property-cta:hover{
+  color:var(--brass);
+  gap:15px;
+}
+
+
+/* -----------------------------------------
+   PILARES
+----------------------------------------- */
+
+.castellari .curadoria-pillars{
+  position:relative;
+  z-index:2;
+
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+
+  gap:0;
+
+  margin-top:105px;
+
+  border-top:1px solid var(--line);
+}
+
+
+.castellari .curadoria-pillar{
+  position:relative;
+
+  min-height:390px;
+
+  padding:
+    32px
+    40px
+    40px
+    0;
+
+  border-right:1px solid var(--line);
+
+  overflow:hidden;
+
+  transition:
+    background .45s ease,
+    transform .45s ease;
+}
+
+
+.castellari .curadoria-pillar + .curadoria-pillar{
+  padding-left:40px;
+}
+
+
+.castellari .curadoria-pillar:last-child{
+  border-right:none;
+}
+
+
+.castellari .curadoria-pillar::before{
+  content:"";
+
+  position:absolute;
+
+  right:-80px;
+  bottom:-100px;
+
+  width:230px;
+  height:230px;
+
+  border:1px solid rgba(169,128,63,.18);
+
+  border-radius:50%;
+
+  transition:
+    transform .6s ease,
+    opacity .6s ease;
+}
+
+
+.castellari .curadoria-pillar:hover{
+  background:rgba(244,239,227,.45);
+}
+
+
+.castellari .curadoria-pillar:hover::before{
+  transform:scale(1.25);
+}
+
+
+/* número */
+
+.castellari .pillar-number{
+  display:block;
+
+  font-size:12px;
+  color:var(--brass);
+
+  margin-bottom:55px;
+}
+
+
+/* linha */
+
+.castellari .pillar-line{
+  width:32px;
+  height:1px;
+
+  background:var(--brass);
+
+  margin-bottom:26px;
+
+  transition:width .4s ease;
+}
+
+
+.castellari .curadoria-pillar:hover .pillar-line{
+  width:70px;
+}
+
+
+.castellari .curadoria-pillar h3{
+  position:relative;
+
+  font-size:clamp(28px,3vw,38px);
+  line-height:1;
+
+  margin-top:10px;
+
+  letter-spacing:-.025em;
+}
+
+
+.castellari .curadoria-pillar p{
+  position:relative;
+
+  max-width:300px;
+
+  margin-top:22px;
+
+  font-size:14px;
+  line-height:1.75;
+
+  color:#68604d;
+}
+
+
+/* -----------------------------------------
+   FRASE / ASSINATURA
+----------------------------------------- */
+
+.castellari .curadoria-quote{
+  position:relative;
+  z-index:2;
+
+  max-width:920px;
+
+  margin:125px auto 0;
+
+  text-align:center;
+
+  padding:
+    90px
+    50px
+    75px;
+}
+
+
+.castellari .curadoria-quote::before{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  border:1px solid rgba(169,128,63,.3);
+
+  clip-path:
+    polygon(
+      0 0,
+      72% 0,
+      100% 28%,
+      100% 100%,
+      28% 100%,
+      0 72%
+    );
+}
+
+
+.castellari .quote-mark{
+  position:absolute;
+
+  top:28px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  font-family:'Fraunces',serif;
+
+  font-size:80px;
+
+  line-height:1;
+
+  color:var(--brass);
+
+  opacity:.5;
+}
+
+
+.castellari .curadoria-quote p{
+  position:relative;
+
+  max-width:720px;
+
+  margin:0 auto;
+
+  font-family:'Fraunces',serif;
+
+  font-size:clamp(26px,3vw,42px);
+
+  line-height:1.15;
+
+  font-style:italic;
+
+  color:var(--ink);
+
+  letter-spacing:-.02em;
+}
+
+
+.castellari .quote-signature{
+  position:relative;
+
+  display:block;
+
+  margin-top:30px;
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size:10px;
+
+  letter-spacing:.22em;
+
+  color:var(--brass);
+}
+
+
+/* -----------------------------------------
+   ANIMAÇÃO DE ENTRADA
+----------------------------------------- */
+
+.castellari .curadoria-pillar.reveal:nth-child(1){
+  transition-delay:.05s;
+}
+
+.castellari .curadoria-pillar.reveal:nth-child(2){
+  transition-delay:.15s;
+}
+
+.castellari .curadoria-pillar.reveal:nth-child(3){
+  transition-delay:.25s;
+}
+
+
+.castellari .curadoria-quote.reveal{
+  transform:translateY(35px) scale(.98);
+}
+
+
+.castellari .curadoria-quote.reveal.in{
+  transform:translateY(0) scale(1);
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media(max-width:900px){
+
+  .castellari .castellari-curadoria{
+    padding-top:100px;
+    padding-bottom:100px;
+  }
+
+  .castellari .castellari-curadoria .section-head{
+    grid-template-columns:1fr;
+    gap:35px;
+    margin-bottom:70px;
+  }
+
+  .castellari .curadoria-intro{
+    grid-template-columns:90px 1fr;
+  }
+
+  .castellari .curadoria-intro-content{
+    padding-right:30px;
+  }
+
+  .castellari .curadoria-intro-content::before,
+  .castellari .curadoria-intro-content::after{
+    opacity:.4;
+  }
+
+  .castellari .curadoria-pillars{
+    grid-template-columns:1fr;
+  }
+
+  .castellari .curadoria-pillar{
+    min-height:auto;
+    padding:35px 0;
+    border-right:none;
+    border-bottom:1px solid var(--line);
+  }
+
+  .castellari .curadoria-pillar + .curadoria-pillar{
+    padding-left:0;
+  }
+
+  .castellari .curadoria-pillar:last-child{
+    border-bottom:none;
+  }
+
+  .castellari .curadoria-quote{
+    margin-top:90px;
+    padding:80px 30px 65px;
+  }
+
+}
+
+
+@media(max-width:600px){
+
+  .castellari .castellari-curadoria{
+    padding-top:80px;
+  }
+
+  .castellari .castellari-curadoria::before{
+    right:-140px;
+    top:80px;
+    font-size:120px;
+  }
+
+  .castellari .castellari-curadoria .section-head h2{
+    font-size:40px;
+  }
+
+  .castellari .curadoria-intro{
+    grid-template-columns:1fr;
+    min-height:auto;
+  }
+
+  .castellari .curadoria-intro-number{
+    padding:24px 0 0;
+  }
+
+  .castellari .curadoria-intro-number::after{
+    display:none;
+  }
+
+  .castellari .curadoria-intro-content{
+    padding:
+      35px
+      0
+      50px;
+  }
+
+  .castellari .curadoria-intro-content::before{
+    width:120px;
+    height:120px;
+    right:0;
+    top:40px;
+  }
+
+  .castellari .curadoria-intro-content::after{
+    width:84px;
+    height:84px;
+    right:18px;
+    top:58px;
+  }
+
+  .castellari .curadoria-intro-content h3{
+    font-size:34px;
+  }
+
+  .castellari .curadoria-pillars{
+    margin-top:70px;
+  }
+
+  .castellari .curadoria-pillar{
+    min-height:260px;
+  }
+
+  .castellari .pillar-number{
+    margin-bottom:35px;
+  }
+
+  .castellari .curadoria-quote{
+    margin-top:65px;
+    padding:75px 22px 55px;
+  }
+
+  .castellari .curadoria-quote p{
+    font-size:28px;
+  }
+
 }
  
 /* ================= DIFERENCIAIS ================= */
