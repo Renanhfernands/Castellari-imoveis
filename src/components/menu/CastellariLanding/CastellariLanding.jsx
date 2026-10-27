@@ -779,15 +779,11 @@ export default function CastellariLanding() {
           </div>
 
           <div className="stat">
-            <div className="num mono">3</div>
+            <div className="num mono">30</div>
             <div className="cap">Imóveis negociados</div>
           </div>
 
-          <div className="stat">
-            <div className="num mono">R$ 2,8 bi</div>
-            <div className="cap">Em transações</div>
-          </div>
-
+          
           <div className="stat">
             <div className="num mono">98%</div>
             <div className="cap">Clientes por indicação</div>
@@ -1208,11 +1204,7 @@ export default function CastellariLanding() {
                 atendimento@castellariimoveis.com
               </div>
 
-              <div>
-                <span>Endereço</span>
-                Av. Domingos Antônio di Sandro,
-                São Paulo — SP
-              </div>
+             
 
             </div>
 
@@ -1360,7 +1352,7 @@ export default function CastellariLanding() {
               <div className="footer-col">
 
                 <h4>
-                  Redes
+                  Redes Socias 
                 </h4>
 
                 <a
@@ -1371,9 +1363,7 @@ export default function CastellariLanding() {
                   Instagram
                 </a>
 
-                <a href="#">
-                  LinkedIn
-                </a>
+            
 
               </div>
 
@@ -1387,10 +1377,7 @@ export default function CastellariLanding() {
               © 2026 Castellari Imóveis. CRECI 000000-J.
             </div>
 
-            <div>
-              Av. Domingos Antônio di Sandro,
-              São Paulo — SP
-            </div>
+            
 
           </div>
 
