@@ -1,934 +1,2821 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 
+
+
+
 .castellari{
+
   --ink:#1B1912;
+
   --ink-2:#26221A;
+
   --stone:#EDE6D8;
+
   --stone-2:#E2D8C4;
+
   --stone-3:#D8CBAE;
+
   --brass:#A9803F;
+
   --brass-light:#C9A667;
+
   --bottle:#333F2E;
+
   --cream:#F4EFE3;
+
   --ink-text:#2A2620;
+
   --line:#C9BCA0;
+
   --line-dark:#4A4436;
+
   --max:1240px;
- 
+
+
+
   font-family:'Work Sans', sans-serif;
+
   background:var(--stone);
+
   color:var(--ink-text);
+
   -webkit-font-smoothing:antialiased;
+
   overflow-x:hidden;
+
 }
+
 .castellari *{box-sizing:border-box;}
+
 .castellari h1,.castellari h2,.castellari h3,.castellari .font-display{
+
   font-family:'Fraunces', serif;
+
   font-weight:500;
+
   letter-spacing:-0.01em;
+
   margin:0;
+
 }
+
 .castellari p{margin:0;}
+
 .castellari .mono{
+
   font-family:'IBM Plex Mono', monospace;
+
   letter-spacing:0.02em;
+
 }
+
 .castellari a{color:inherit; text-decoration:none;}
+
 .castellari img,.castellari svg{display:block; max-width:100%;}
+
 .castellari .wrap{max-width:var(--max); margin:0 auto; padding:0 40px;}
+
 @media(max-width:768px){ .castellari .wrap{padding:0 22px;} }
- 
+
+
+
 /* ---------- reveal on scroll ---------- */
+
 .castellari .reveal{opacity:0; transform:translateY(18px); transition:opacity .9s ease, transform .9s ease;}
+
 .castellari .reveal.in{opacity:1; transform:translateY(0);}
- 
+
+
+
 /* ================= NAV ================= */
+
 .castellari header.nav{
+
   position:fixed; top:0; left:0; right:0; z-index:100;
+
   padding:26px 0;
+
   transition:background .4s ease, padding .4s ease, border-color .4s ease;
+
   border-bottom:1px solid transparent;
+
 }
+
 .castellari header.nav.scrolled{
+
   background:rgba(27,25,18,0.92);
+
   backdrop-filter:blur(6px);
+
   padding:16px 0;
+
   border-bottom:1px solid rgba(201,166,103,0.25);
+
 }
+
 .castellari .nav-inner{display:flex; align-items:center; justify-content:space-between;}
+
 .castellari .brand{
+
   font-family:'Fraunces', serif;
+
   font-size:19px;
+
   color:var(--cream);
+
   letter-spacing:0.14em;
+
   font-weight:500;
+
   display:flex; align-items:center; gap:10px;
+
 }
+
 .castellari .brand .mark{width:9px; height:9px; border:1px solid var(--brass-light); transform:rotate(45deg);}
+
 .castellari .nav-links{display:flex; align-items:center; gap:38px;}
+
 .castellari .nav-links a{
+
   font-size:13px; color:var(--cream); opacity:.78;
+
   text-transform:uppercase; letter-spacing:0.09em;
+
   transition:opacity .3s ease;
+
 }
+
 .castellari .nav-links a:hover{opacity:1;}
+
 .castellari .nav-cta{
+
   border:1px solid var(--brass-light); color:var(--cream) !important;
+
   padding:10px 20px; font-size:12px !important; opacity:1 !important;
+
   text-transform:uppercase; letter-spacing:0.09em;
+
   transition:background .3s ease, color .3s ease;
+
 }
+
 .castellari .nav-cta:hover{background:var(--brass-light); color:var(--ink) !important;}
+
 .castellari .nav-toggle{display:none; background:none; border:none; color:var(--cream); font-size:22px; cursor:pointer;}
+
 @media(max-width:860px){
+
   .castellari .nav-links{display:none;}
+
   .castellari .nav-toggle{display:block;}
+
 }
- 
+
+
+
 /* ================= HERO ================= */
+
 .castellari .hero{
+
   background:var(--ink);
+
   color:var(--cream);
+
   padding:170px 0 90px;
+
   position:relative;
+
   overflow:hidden;
+
 }
+
 .castellari .hero-grid{
+
   display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;
+
 }
+
 .castellari .hero-eyebrow{
+
   display:flex; align-items:center; gap:12px;
+
   font-size:12px; text-transform:uppercase; letter-spacing:0.16em;
+
   color:var(--brass-light); margin-bottom:26px;
+
 }
+
 .castellari .hero-eyebrow .rule{width:34px; height:1px; background:var(--brass-light);}
+
 .castellari .hero h1{
+
   font-size:clamp(38px, 4.4vw, 62px);
+
   line-height:1.06;
+
   font-weight:500;
+
   max-width:620px;
+
 }
+
 .castellari .hero h1 em{
+
   font-style:italic; font-weight:400; color:var(--brass-light);
+
 }
+
 .castellari .hero p.lead{
+
   margin-top:26px; font-size:17px; line-height:1.7;
+
   color:rgba(244,239,227,0.72); max-width:480px; font-weight:300;
+
 }
+
 .castellari .hero-actions{display:flex; gap:16px; margin-top:40px; flex-wrap:wrap;}
+
 .castellari .btn{
+
   padding:15px 28px; font-size:13px; text-transform:uppercase; letter-spacing:0.09em;
+
   cursor:pointer; border:1px solid transparent; transition:all .3s ease;
+
   display:inline-block;
+
 }
+
 .castellari .btn-primary{background:var(--brass-light); color:var(--ink); font-weight:500;}
+
 .castellari .btn-primary:hover{background:var(--cream);}
+
 .castellari .btn-ghost{border-color:rgba(244,239,227,0.35); color:var(--cream);}
+
 .castellari .btn-ghost:hover{border-color:var(--cream);}
- 
+
+
+
 .castellari .hero-art{position:relative;}
+
 .castellari .hero-art svg{width:100%; height:auto;}
+
 .castellari .facade-line{fill:none; stroke:var(--brass-light); stroke-width:1.1; opacity:.9;}
+
 .castellari .facade-fill{fill:rgba(201,166,103,0.06);}
+
 .castellari .dim-text{font-family:'IBM Plex Mono', monospace; font-size:10px; fill:var(--brass-light); opacity:.85;}
- 
+
+
+
 .castellari .draw{stroke-dasharray:1600; stroke-dashoffset:1600; animation:draw 2.4s ease forwards .3s;}
+
 @keyframes draw{to{stroke-dashoffset:0;}}
+
 .castellari .fade-in-svg{opacity:0; animation:fadeSvg 1.4s ease forwards 1.6s;}
+
 @keyframes fadeSvg{to{opacity:1;}}
- 
+
+
+
 /* ================= STATS ================= */
+
 .castellari .stats{background:var(--ink-2); padding:30px 0;}
+
 .castellari .stats-inner{
+
   display:grid; grid-template-columns:repeat(4,1fr); gap:30px;
+
 }
+
 .castellari .stat{padding:20px 0; border-left:1px solid rgba(201,166,103,0.28); padding-left:22px;}
+
 .castellari .stat .num{font-family:'IBM Plex Mono', monospace; font-size:26px; color:var(--brass-light);}
+
 .castellari .stat .cap{font-size:12px; color:rgba(244,239,227,0.6); margin-top:6px; text-transform:uppercase; letter-spacing:0.06em;}
+
 @media(max-width:860px){
+
   .castellari .stats-inner{grid-template-columns:repeat(2,1fr);}
+
 }
- 
+
+
+
 /* ================= SECTION HEADERS ================= */
+
 .castellari .section{padding:120px 0;}
+
 .castellari .section-head{
+
   display:flex; justify-content:space-between; align-items:flex-end;
+
   gap:40px; margin-bottom:64px; flex-wrap:wrap;
+
 }
+
 .castellari .section-head .eyebrow{
+
   font-size:12px; text-transform:uppercase; letter-spacing:0.16em; color:var(--brass);
+
   display:block; margin-bottom:16px;
+
 }
+
 .castellari .section-head h2{font-size:clamp(28px,3vw,42px); max-width:560px; line-height:1.15;}
+
 .castellari .section-head p{max-width:340px; font-size:15px; line-height:1.65; color:#5c5644; font-weight:300;}
- 
+
+
+
 /* =========================================================
+
    CURADORIA CASTELLARI
+
    Editorial / Luxury / Architectural
+
 ========================================================= */
 
+
+
 .castellari .castellari-curadoria{
+
   position:relative;
+
   overflow:hidden;
+
   background:
+
     radial-gradient(
+
       circle at 85% 20%,
+
       rgba(169,128,63,.08),
+
       transparent 28%
+
     ),
+
     var(--stone);
+
   padding-top:145px;
+
   padding-bottom:150px;
+
 }
+
+
+
 
 
 /* -----------------------------------------
+
    ELEMENTO DECORATIVO DE FUNDO
+
 ----------------------------------------- */
 
+
+
 .castellari .castellari-curadoria::before{
+
   content:"CASTELLARI";
+
   position:absolute;
+
   right:-80px;
+
   top:100px;
 
+
+
   font-family:'Fraunces',serif;
+
   font-size:clamp(120px,18vw,260px);
+
   font-weight:500;
+
   line-height:.8;
+
+
 
   color:rgba(169,128,63,.045);
 
+
+
   pointer-events:none;
+
   white-space:nowrap;
 
+
+
   transform:rotate(-8deg);
+
 }
+
+
+
 
 
 /* -----------------------------------------
+
    CABEÇALHO
+
 ----------------------------------------- */
 
+
+
 .castellari .castellari-curadoria .section-head{
+
   position:relative;
+
   z-index:2;
 
+
+
   display:grid;
+
   grid-template-columns:minmax(0,1.4fr) minmax(260px,.6fr);
+
+
 
   align-items:end;
 
+
+
   gap:80px;
+
   margin-bottom:105px;
+
 }
+
+
+
 
 
 .castellari .castellari-curadoria .section-head h2{
+
   max-width:760px;
+
   font-size:clamp(42px,5vw,72px);
+
   line-height:.98;
+
   letter-spacing:-.035em;
+
 }
+
+
+
 
 
 .castellari .castellari-curadoria .section-head h2 em{
+
   color:var(--brass);
+
   font-style:italic;
+
   font-weight:400;
+
 }
+
+
+
 
 
 .castellari .castellari-curadoria .section-head p{
+
   position:relative;
+
   max-width:360px;
+
+
 
   padding-left:28px;
 
+
+
   font-size:15px;
+
   line-height:1.8;
+
 }
+
+
+
 
 
 /* linha lateral */
 
+
+
 .castellari .castellari-curadoria .section-head p::before{
+
   content:"";
 
+
+
   position:absolute;
+
   left:0;
+
   top:5px;
+
   bottom:5px;
+
+
 
   width:1px;
 
+
+
   background:var(--brass);
+
 }
+
+
+
 
 
 /* -----------------------------------------
+
    INTRO EDITORIAL
+
 ----------------------------------------- */
 
+
+
 .castellari .curadoria-intro{
+
   position:relative;
+
   z-index:2;
 
+
+
   display:grid;
+
   grid-template-columns:170px 1fr;
+
+
 
   min-height:430px;
 
+
+
   border-top:1px solid var(--line);
+
   border-bottom:1px solid var(--line);
+
 }
+
+
+
 
 
 /* número gigante */
 
+
+
 .castellari .curadoria-intro-number{
+
   position:relative;
 
+
+
   display:flex;
+
   align-items:flex-start;
+
+
 
   padding-top:34px;
 
+
+
   font-size:13px;
+
   color:var(--brass);
 
+
+
   letter-spacing:.08em;
+
 }
+
+
+
 
 
 .castellari .curadoria-intro-number::after{
+
   content:"";
+
+
 
   position:absolute;
 
+
+
   left:2px;
+
   top:70px;
 
+
+
   width:55px;
+
   height:1px;
 
+
+
   background:var(--brass);
+
 }
+
+
+
 
 
 /* conteúdo */
 
+
+
 .castellari .curadoria-intro-content{
+
   position:relative;
 
+
+
   padding:
+
     55px
+
     clamp(30px,6vw,110px)
+
     65px
+
     0;
+
 }
+
+
+
 
 
 .castellari .curadoria-intro-content::before{
+
   content:"";
+
+
 
   position:absolute;
 
+
+
   right:7%;
+
   top:38px;
 
+
+
   width:190px;
+
   height:190px;
+
+
 
   border:1px solid rgba(169,128,63,.25);
 
+
+
   transform:rotate(45deg);
 
+
+
   pointer-events:none;
+
 }
+
+
+
 
 
 .castellari .curadoria-intro-content::after{
+
   content:"";
+
+
 
   position:absolute;
 
+
+
   right:calc(7% + 28px);
+
   top:66px;
 
+
+
   width:134px;
+
   height:134px;
+
+
 
   border:1px solid rgba(169,128,63,.16);
 
+
+
   transform:rotate(45deg);
 
+
+
   pointer-events:none;
+
 }
+
+
+
 
 
 .castellari .eyebrow-inline{
+
   position:relative;
+
   z-index:2;
+
 }
+
+
+
 
 
 .castellari .curadoria-intro-content h3{
+
   position:relative;
+
   z-index:2;
+
+
 
   max-width:720px;
 
+
+
   margin-top:22px;
 
+
+
   font-size:clamp(34px,4vw,58px);
+
   line-height:1.02;
 
+
+
   letter-spacing:-.03em;
+
 }
+
+
+
 
 
 .castellari .curadoria-intro-content p{
+
   position:relative;
+
   z-index:2;
+
+
 
   max-width:610px;
 
+
+
   margin-top:25px;
 
+
+
   font-size:15px;
+
   line-height:1.8;
 
+
+
   color:#5c5644;
+
 }
+
+
+
 
 
 .castellari .curadoria-intro-content p + p{
+
   margin-top:12px;
+
 }
 
 
+
+
+
 /* -----------------------------------------
+
    LINK
+
 ----------------------------------------- */
 
+
+
 .castellari .curadoria-intro-content .property-cta{
+
   position:relative;
+
   z-index:3;
+
+
 
   margin-top:32px;
 
+
+
   transition:
+
     gap .35s ease,
+
     color .35s ease;
+
 }
+
+
+
 
 
 .castellari .curadoria-intro-content .property-cta:hover{
+
   color:var(--brass);
+
   gap:15px;
+
 }
+
+
+
 
 
 /* -----------------------------------------
+
    PILARES
+
 ----------------------------------------- */
 
+
+
 .castellari .curadoria-pillars{
+
   position:relative;
+
   z-index:2;
 
+
+
   display:grid;
+
   grid-template-columns:repeat(3,1fr);
+
+
 
   gap:0;
 
+
+
   margin-top:105px;
 
+
+
   border-top:1px solid var(--line);
+
 }
+
+
+
 
 
 .castellari .curadoria-pillar{
+
   position:relative;
+
+
 
   min-height:390px;
 
+
+
   padding:
+
     32px
+
     40px
+
     40px
+
     0;
+
+
 
   border-right:1px solid var(--line);
 
+
+
   overflow:hidden;
 
+
+
   transition:
+
     background .45s ease,
+
     transform .45s ease;
+
 }
+
+
+
 
 
 .castellari .curadoria-pillar + .curadoria-pillar{
+
   padding-left:40px;
+
 }
+
+
+
 
 
 .castellari .curadoria-pillar:last-child{
+
   border-right:none;
+
 }
+
+
+
 
 
 .castellari .curadoria-pillar::before{
+
   content:"";
+
+
 
   position:absolute;
 
+
+
   right:-80px;
+
   bottom:-100px;
 
+
+
   width:230px;
+
   height:230px;
+
+
 
   border:1px solid rgba(169,128,63,.18);
 
+
+
   border-radius:50%;
 
+
+
   transition:
+
     transform .6s ease,
+
     opacity .6s ease;
+
 }
+
+
+
 
 
 .castellari .curadoria-pillar:hover{
+
   background:rgba(244,239,227,.45);
+
 }
+
+
+
 
 
 .castellari .curadoria-pillar:hover::before{
+
   transform:scale(1.25);
+
 }
+
+
+
 
 
 /* número */
 
+
+
 .castellari .pillar-number{
+
   display:block;
 
+
+
   font-size:12px;
+
   color:var(--brass);
 
+
+
   margin-bottom:55px;
+
 }
+
+
+
 
 
 /* linha */
 
+
+
 .castellari .pillar-line{
+
   width:32px;
+
   height:1px;
+
+
 
   background:var(--brass);
 
+
+
   margin-bottom:26px;
 
+
+
   transition:width .4s ease;
+
 }
+
+
+
 
 
 .castellari .curadoria-pillar:hover .pillar-line{
+
   width:70px;
+
 }
+
+
+
 
 
 .castellari .curadoria-pillar h3{
+
   position:relative;
 
+
+
   font-size:clamp(28px,3vw,38px);
+
   line-height:1;
+
+
 
   margin-top:10px;
 
+
+
   letter-spacing:-.025em;
+
 }
+
+
+
 
 
 .castellari .curadoria-pillar p{
+
   position:relative;
+
+
 
   max-width:300px;
 
+
+
   margin-top:22px;
 
+
+
   font-size:14px;
+
   line-height:1.75;
 
+
+
   color:#68604d;
+
 }
 
 
+
+
+
 /* -----------------------------------------
+
    FRASE / ASSINATURA
+
 ----------------------------------------- */
 
+
+
 .castellari .curadoria-quote{
+
   position:relative;
+
   z-index:2;
+
+
 
   max-width:920px;
 
+
+
   margin:125px auto 0;
+
+
 
   text-align:center;
 
+
+
   padding:
+
     90px
+
     50px
+
     75px;
+
 }
+
+
+
 
 
 .castellari .curadoria-quote::before{
+
   content:"";
 
+
+
   position:absolute;
+
+
 
   inset:0;
 
+
+
   border:1px solid rgba(169,128,63,.3);
 
+
+
   clip-path:
+
     polygon(
+
       0 0,
+
       72% 0,
+
       100% 28%,
+
       100% 100%,
+
       28% 100%,
+
       0 72%
+
     );
+
 }
+
+
+
 
 
 .castellari .quote-mark{
+
   position:absolute;
 
+
+
   top:28px;
+
   left:50%;
+
+
 
   transform:translateX(-50%);
 
+
+
   font-family:'Fraunces',serif;
+
+
 
   font-size:80px;
 
+
+
   line-height:1;
+
+
 
   color:var(--brass);
 
+
+
   opacity:.5;
+
 }
+
+
+
 
 
 .castellari .curadoria-quote p{
+
   position:relative;
+
+
 
   max-width:720px;
 
+
+
   margin:0 auto;
+
+
 
   font-family:'Fraunces',serif;
 
+
+
   font-size:clamp(26px,3vw,42px);
+
+
 
   line-height:1.15;
 
+
+
   font-style:italic;
+
+
 
   color:var(--ink);
 
+
+
   letter-spacing:-.02em;
+
 }
+
+
+
 
 
 .castellari .quote-signature{
+
   position:relative;
+
+
 
   display:block;
 
+
+
   margin-top:30px;
+
+
 
   font-family:'IBM Plex Mono',monospace;
 
+
+
   font-size:10px;
+
+
 
   letter-spacing:.22em;
 
+
+
   color:var(--brass);
+
 }
+
+
+
 
 
 /* -----------------------------------------
+
    ANIMAÇÃO DE ENTRADA
+
 ----------------------------------------- */
 
+
+
 .castellari .curadoria-pillar.reveal:nth-child(1){
+
   transition-delay:.05s;
+
 }
+
+
 
 .castellari .curadoria-pillar.reveal:nth-child(2){
+
   transition-delay:.15s;
+
 }
 
+
+
 .castellari .curadoria-pillar.reveal:nth-child(3){
+
   transition-delay:.25s;
+
 }
+
+
+
 
 
 .castellari .curadoria-quote.reveal{
+
   transform:translateY(35px) scale(.98);
+
 }
+
+
+
 
 
 .castellari .curadoria-quote.reveal.in{
+
   transform:translateY(0) scale(1);
+
 }
+
+
+
 
 
 /* =========================================================
+
    RESPONSIVO
+
 ========================================================= */
+
+
 
 @media(max-width:900px){
 
+
+
   .castellari .castellari-curadoria{
+
     padding-top:100px;
+
     padding-bottom:100px;
+
   }
+
+
 
   .castellari .castellari-curadoria .section-head{
+
     grid-template-columns:1fr;
+
     gap:35px;
+
     margin-bottom:70px;
+
   }
+
+
 
   .castellari .curadoria-intro{
+
     grid-template-columns:90px 1fr;
+
   }
+
+
 
   .castellari .curadoria-intro-content{
+
     padding-right:30px;
+
   }
+
+
 
   .castellari .curadoria-intro-content::before,
+
   .castellari .curadoria-intro-content::after{
+
     opacity:.4;
+
   }
+
+
 
   .castellari .curadoria-pillars{
+
     grid-template-columns:1fr;
+
   }
+
+
 
   .castellari .curadoria-pillar{
+
     min-height:auto;
+
     padding:35px 0;
+
     border-right:none;
+
     border-bottom:1px solid var(--line);
+
   }
+
+
 
   .castellari .curadoria-pillar + .curadoria-pillar{
+
     padding-left:0;
+
   }
+
+
 
   .castellari .curadoria-pillar:last-child{
+
     border-bottom:none;
+
   }
+
+
 
   .castellari .curadoria-quote{
+
     margin-top:90px;
+
     padding:80px 30px 65px;
+
   }
 
+
+
 }
+
+
+
 
 
 @media(max-width:600px){
 
+
+
   .castellari .castellari-curadoria{
+
     padding-top:80px;
+
   }
+
+
 
   .castellari .castellari-curadoria::before{
+
     right:-140px;
+
     top:80px;
+
     font-size:120px;
+
   }
+
+
 
   .castellari .castellari-curadoria .section-head h2{
+
     font-size:40px;
+
   }
+
+
 
   .castellari .curadoria-intro{
+
     grid-template-columns:1fr;
+
     min-height:auto;
+
   }
+
+
 
   .castellari .curadoria-intro-number{
+
     padding:24px 0 0;
+
   }
+
+
 
   .castellari .curadoria-intro-number::after{
+
     display:none;
+
   }
+
+
 
   .castellari .curadoria-intro-content{
+
     padding:
+
       35px
+
       0
+
       50px;
+
   }
+
+
 
   .castellari .curadoria-intro-content::before{
+
     width:120px;
+
     height:120px;
+
     right:0;
+
     top:40px;
+
   }
+
+
 
   .castellari .curadoria-intro-content::after{
+
     width:84px;
+
     height:84px;
+
     right:18px;
+
     top:58px;
+
   }
+
+
 
   .castellari .curadoria-intro-content h3{
+
     font-size:34px;
+
   }
+
+
 
   .castellari .curadoria-pillars{
+
     margin-top:70px;
+
   }
+
+
 
   .castellari .curadoria-pillar{
+
     min-height:260px;
+
   }
+
+
 
   .castellari .pillar-number{
+
     margin-bottom:35px;
+
   }
+
+
 
   .castellari .curadoria-quote{
+
     margin-top:65px;
+
     padding:75px 22px 55px;
+
   }
+
+
 
   .castellari .curadoria-quote p{
+
     font-size:28px;
+
   }
 
+
+
 }
- 
+
+
+
 /* ================= DIFERENCIAIS ================= */
+
 .castellari .diff-section{background:var(--ink); color:var(--cream);}
+
 .castellari .diff-section .section-head p{color:rgba(244,239,227,0.6);}
+
 .castellari .diff-section .section-head .eyebrow{color:var(--brass-light);}
+
 .castellari .diff-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(201,166,103,0.22);}
+
 @media(max-width:860px){.castellari .diff-grid{grid-template-columns:repeat(2,1fr);}}
+
 .castellari .diff-item{background:var(--ink); padding:36px 28px;}
+
 .castellari .diff-item .icon{width:30px; height:30px; margin-bottom:22px;}
+
 .castellari .diff-item .icon svg{stroke:var(--brass-light); fill:none; stroke-width:1.3;}
+
 .castellari .diff-item h3{font-size:17px; font-weight:500; margin-bottom:10px;}
+
 .castellari .diff-item p{font-size:13.5px; line-height:1.6; color:rgba(244,239,227,0.6); font-weight:300;}
- 
+
+
+
 /* ================= PROCESSO ================= */
+
 .castellari .process-list{display:flex; flex-direction:column;}
+
 .castellari .process-item{
+
   display:grid; grid-template-columns:90px 1fr; gap:30px;
+
   padding:32px 0; border-top:1px solid var(--line);
+
   align-items:start;
+
 }
+
 .castellari .process-item:last-child{border-bottom:1px solid var(--line);}
+
 .castellari .process-item .idx{font-family:'IBM Plex Mono', monospace; font-size:14px; color:var(--brass); padding-top:4px;}
+
 .castellari .process-item h3{font-size:20px; font-weight:500; margin-bottom:8px;}
+
 .castellari .process-item p{font-size:14.5px; color:#5c5644; line-height:1.65; max-width:560px; font-weight:300;}
- 
+
+
+
 /* ================= DEPOIMENTOS ================= */
+
 .castellari .testi-section{background:var(--stone-2);}
+
 .castellari .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+
 @media(max-width:960px){.castellari .testi-grid{grid-template-columns:1fr;}}
+
 .castellari .testi-card{background:var(--cream); border:1px solid var(--line); padding:32px 28px;}
+
 .castellari .testi-card p{font-size:15px; line-height:1.75; font-style:italic; color:#3a3527; font-family:'Fraunces', serif; font-weight:400;}
+
 .castellari .testi-who{display:flex; align-items:center; gap:12px; margin-top:24px;}
+
 .castellari .testi-avatar{
+
   width:38px; height:38px; border-radius:50%; border:1px solid var(--brass);
+
   display:flex; align-items:center; justify-content:center;
+
   font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--brass);
+
 }
+
 .castellari .testi-who .name{font-size:13px; font-weight:500;}
+
 .castellari .testi-who .role{font-size:11.5px; color:#8a8267;}
- 
+
+
+
 /* ================= CONTATO ================= */
+
 .castellari .contact-section{background:var(--ink); color:var(--cream);}
+
 .castellari .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:70px;}
+
 @media(max-width:900px){.castellari .contact-grid{grid-template-columns:1fr; gap:50px;}}
+
 .castellari .contact-info h2{font-size:clamp(28px,3vw,40px); max-width:420px; line-height:1.15;}
+
 .castellari .contact-info p{margin-top:20px; font-size:15px; color:rgba(244,239,227,0.65); max-width:380px; line-height:1.7; font-weight:300;}
+
 .castellari .eyebrow-inline{
+
   color:var(--brass-light); font-size:12px; text-transform:uppercase;
+
   letter-spacing:.16em; display:block; margin-bottom:16px;
+
 }
+
 .castellari .contact-detail{margin-top:36px; display:flex; flex-direction:column; gap:14px;}
+
 .castellari .contact-detail div{font-size:13.5px; color:rgba(244,239,227,0.8);}
+
 .castellari .contact-detail span{display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--brass-light); margin-bottom:4px;}
- 
+
+
+
 .castellari form{display:flex; flex-direction:column; gap:22px;}
+
 .castellari .form-row{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+
 @media(max-width:560px){.castellari .form-row{grid-template-columns:1fr;}}
+
 .castellari .field{display:flex; flex-direction:column; gap:8px;}
+
 .castellari .field label{font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:rgba(244,239,227,0.55);}
+
 .castellari .field input, .castellari .field textarea{
+
   background:transparent; border:none; border-bottom:1px solid rgba(244,239,227,0.28);
+
   padding:10px 2px; color:var(--cream); font-family:'Work Sans', sans-serif; font-size:14px;
+
   outline:none; transition:border-color .3s ease; width:100%;
+
 }
+
 .castellari .field input:focus, .castellari .field textarea:focus{border-color:var(--brass-light);}
+
 .castellari .field textarea{resize:vertical; min-height:80px;}
+
 .castellari .form-submit{
+
   align-self:flex-start; margin-top:6px;
+
   background:var(--brass-light); color:var(--ink); border:none;
+
   padding:15px 30px; font-size:13px; text-transform:uppercase; letter-spacing:0.09em;
+
   cursor:pointer; transition:background .3s ease;
+
   font-family:'Work Sans', sans-serif; font-weight:500;
+
 }
+
 .castellari .form-submit:hover{background:var(--cream);}
+
 .castellari .form-note{font-size:12px; color:rgba(244,239,227,0.5); margin-top:4px;}
- 
+
+
+
 /* ================= FOOTER ================= */
+
 .castellari footer{background:#15130E; color:rgba(244,239,227,0.55); padding:56px 0 30px;}
+
 .castellari .footer-brand{margin-bottom:0;}
+
 .castellari .footer-top{
+
   display:flex; justify-content:space-between; align-items:flex-start;
+
   gap:40px; flex-wrap:wrap; padding-bottom:36px; border-bottom:1px solid rgba(201,166,103,0.18);
+
 }
+
 .castellari .footer-links{display:flex; gap:60px; flex-wrap:wrap;}
+
 .castellari .footer-col h4{font-size:11px; text-transform:uppercase; letter-spacing:0.09em; color:var(--brass-light); margin-bottom:14px;}
+
 .castellari .footer-col a, .castellari .footer-col div{display:block; font-size:13px; margin-bottom:9px; color:rgba(244,239,227,0.6);}
+
 .castellari .footer-bottom{
+
   display:flex; justify-content:space-between; padding-top:26px; font-size:12px;
+
   color:rgba(244,239,227,0.4); flex-wrap:wrap; gap:10px;
+
 }
+
+
 
 .logo-castelo {
+
   width: 32px;
+
   height: 32px;
+
   display: block;
+
   flex-shrink: 0;
+
 }
 
+
+
 .brand {
+
   display: flex;
+
   align-items: center;
+
   gap: 10px;
+
 }
+
+/* =========================================================
+   CASTELLARI - AJUSTES FINAIS RESPONSIVOS
+   Menu mobile + tipografia + espaçamento
+========================================================= */
+
+@media (max-width: 860px) {
+
+  .castellari header.nav {
+    padding: 18px 0;
+  }
+
+  .castellari header.nav.scrolled {
+    padding: 13px 0;
+  }
+
+  .castellari .nav-inner {
+    position: relative;
+    min-height: 42px;
+  }
+
+  .castellari .brand {
+    max-width: calc(100% - 55px);
+    font-size: 17px;
+    letter-spacing: 0.08em;
+    gap: 9px;
+  }
+
+  .castellari .brand span {
+    white-space: nowrap;
+  }
+
+  .castellari .brand .logo-castelo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .castellari .nav-toggle {
+    width: 42px;
+    height: 42px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 0;
+    background: transparent;
+    color: var(--cream);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .castellari .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--brass-light);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .castellari .nav-toggle.active span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .castellari .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .castellari .nav-toggle.active span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  .castellari .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 22px;
+    right: 22px;
+    margin: 0;
+    padding: 14px 18px 20px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: rgba(27, 25, 18, 0.98);
+    border: 1px solid rgba(201, 166, 103, 0.18);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    z-index: 200;
+  }
+
+  .castellari .nav.menu-open .nav-links {
+    display: flex;
+  }
+
+  .castellari .nav-links a {
+    width: 100%;
+    padding: 16px 4px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    opacity: 0.88;
+    border-bottom: 1px solid rgba(201, 166, 103, 0.10);
+  }
+
+  .castellari .nav-links a:last-child {
+    border-bottom: none;
+  }
+
+  .castellari .nav-links .nav-cta {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--brass-light);
+    text-align: center;
+    color: var(--brass-light) !important;
+  }
+
+  .castellari .nav-links .nav-cta:hover {
+    background: var(--brass-light);
+    color: var(--ink) !important;
+  }
+
+  .castellari .hero {
+    padding: 125px 0 65px;
+  }
+
+  .castellari .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .castellari .hero-eyebrow {
+    gap: 9px;
+    margin-bottom: 20px;
+    font-size: 9px;
+    letter-spacing: 0.13em;
+    line-height: 1.5;
+  }
+
+  .castellari .hero-eyebrow .rule {
+    width: 24px;
+    flex-shrink: 0;
+  }
+
+  .castellari .hero h1 {
+    max-width: 100%;
+    font-size: clamp(38px, 10vw, 50px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+
+  .castellari .hero p.lead {
+    max-width: 100%;
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .castellari .hero-actions {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .castellari .hero-actions .btn {
+    width: 100%;
+    padding: 14px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .castellari .hero-art {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+  }
+
+  .castellari .stats {
+    padding: 10px 0;
+  }
+
+  .castellari .stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+
+  .castellari .stat {
+    padding: 20px 12px;
+  }
+
+  .castellari .stat .num {
+    font-size: 22px;
+  }
+
+  .castellari .stat .cap {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .castellari .section {
+    padding: 80px 0;
+  }
+
+  .castellari .section-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    margin-bottom: 48px;
+  }
+
+  .castellari .section-head .eyebrow {
+    margin-bottom: 12px;
+    font-size: 10px;
+  }
+
+  .castellari .section-head h2 {
+    max-width: 100%;
+    font-size: clamp(32px, 8.5vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .castellari .section-head p {
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .castellari .castellari-curadoria {
+    padding-top: 80px;
+    padding-bottom: 90px;
+  }
+
+  .castellari .castellari-curadoria .section-head {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 55px;
+  }
+
+  .castellari .castellari-curadoria .section-head h2 {
+    font-size: clamp(34px, 9vw, 44px);
+  }
+
+  .castellari .castellari-curadoria .section-head p {
+    max-width: 100%;
+    padding-left: 20px;
+    font-size: 14px;
+  }
+
+  .castellari .curadoria-intro {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .castellari .curadoria-intro-number {
+    padding: 24px 0 0;
+  }
+
+  .castellari .curadoria-intro-number::after {
+    display: none;
+  }
+
+  .castellari .curadoria-intro-content {
+    padding: 35px 0 50px;
+  }
+
+  .castellari .curadoria-intro-content::before {
+    width: 120px;
+    height: 120px;
+    right: 0;
+    top: 40px;
+  }
+
+  .castellari .curadoria-intro-content::after {
+    width: 84px;
+    height: 84px;
+    right: 18px;
+    top: 58px;
+  }
+
+  .castellari .curadoria-intro-content h3 {
+    max-width: 100%;
+    font-size: clamp(30px, 8.5vw, 38px);
+    line-height: 1.05;
+  }
+
+  .castellari .curadoria-intro-content p {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .castellari .curadoria-pillars {
+    grid-template-columns: 1fr;
+    margin-top: 65px;
+  }
+
+  .castellari .curadoria-pillar {
+    min-height: auto;
+    padding: 32px 0;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .castellari .curadoria-pillar + .curadoria-pillar {
+    padding-left: 0;
+  }
+
+  .castellari .curadoria-pillar:last-child {
+    border-bottom: none;
+  }
+
+  .castellari .curadoria-pillar h3 {
+    font-size: 30px;
+  }
+
+  .castellari .curadoria-pillar p {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .castellari .curadoria-quote {
+    margin-top: 60px;
+    padding: 65px 20px 50px;
+  }
+
+  .castellari .curadoria-quote p {
+    font-size: clamp(24px, 7vw, 30px);
+    line-height: 1.15;
+  }
+
+  .castellari .diff-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .castellari .diff-item {
+    padding: 30px 22px;
+  }
+
+  .castellari .diff-item h3 {
+    font-size: 20px;
+  }
+
+  .castellari .diff-item p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .castellari .process-item {
+    grid-template-columns: 45px 1fr;
+    gap: 15px;
+    padding: 25px 0;
+  }
+
+  .castellari .process-item h3 {
+    font-size: 20px;
+  }
+
+  .castellari .process-item p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .castellari .testi-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .castellari .testi-card {
+    padding: 27px 22px;
+  }
+
+  .castellari .testi-card p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .castellari .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .castellari .contact-info h2 {
+    max-width: 100%;
+    font-size: clamp(32px, 8.5vw, 42px);
+    line-height: 1.05;
+  }
+
+  .castellari .contact-info p {
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .castellari form {
+    gap: 20px;
+  }
+
+  .castellari .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .castellari .form-submit {
+    width: 100%;
+    padding: 15px 20px;
+    text-align: center;
+  }
+
+  .castellari footer {
+    padding: 45px 0 25px;
+  }
+
+  .castellari .footer-top {
+    flex-direction: column;
+    gap: 35px;
+    padding-bottom: 30px;
+  }
+
+  .castellari .footer-links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .castellari .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 20px;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 390px) {
+
+  .castellari .wrap {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .castellari .brand {
+    font-size: 15px;
+    letter-spacing: 0.06em;
+  }
+
+  .castellari .brand .logo-castelo {
+    width: 29px;
+    height: 29px;
+  }
+
+  .castellari .hero {
+    padding-top: 115px;
+  }
+
+  .castellari .hero h1 {
+    font-size: clamp(36px, 10vw, 43px);
+  }
+
+  .castellari .hero p.lead {
+    font-size: 14px;
+  }
+
+  .castellari .section-head h2 {
+    font-size: clamp(30px, 8.8vw, 38px);
+  }
+
+  .castellari .castellari-curadoria .section-head h2 {
+    font-size: 35px;
+  }
+
+  .castellari .curadoria-intro-content h3 {
+    font-size: 31px;
+  }
+
+  .castellari .curadoria-quote p {
+    font-size: 25px;
+  }
+
+  .castellari .footer-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* =========================================================
+   CASTELLARI — RESPONSIVO / MOBILE
+========================================================= */
+
+@media (max-width: 860px) {
+
+  .castellari header.nav {
+    padding: 16px 0;
+  }
+
+  .castellari header.nav.scrolled {
+    padding: 12px 0;
+  }
+
+  .castellari .nav-inner {
+    position: relative;
+    min-height: 42px;
+  }
+
+  /* Logo */
+  .castellari .brand {
+    max-width: calc(100% - 58px);
+    gap: 9px;
+    font-size: 17px;
+    letter-spacing: 0.06em;
+  }
+
+  .castellari .brand .logo-castelo {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .castellari .brand span {
+    white-space: nowrap;
+  }
+
+  /* Botão hamburger */
+  .castellari .nav-toggle {
+    width: 42px;
+    height: 42px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .castellari .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--brass-light);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .castellari .nav-toggle.active span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .castellari .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .castellari .nav-toggle.active span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* Menu fechado */
+  .castellari .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 18px;
+    right: 18px;
+    margin: 0;
+    padding: 12px 18px 20px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: rgba(27, 25, 18, 0.98);
+    border: 1px solid rgba(201, 166, 103, 0.18);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    z-index: 200;
+  }
+
+  /* Menu aberto */
+  .castellari .nav.menu-open .nav-links {
+    display: flex;
+  }
+
+  .castellari .nav-links a {
+    width: 100%;
+    padding: 15px 4px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    opacity: 0.9;
+    border-bottom: 1px solid rgba(201, 166, 103, 0.1);
+  }
+
+  .castellari .nav-links a:last-child {
+    border-bottom: 0;
+  }
+
+  .castellari .nav-links .nav-cta {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--brass-light);
+    text-align: center;
+    color: var(--brass-light) !important;
+  }
+
+  .castellari .nav-links .nav-cta:hover {
+    background: var(--brass-light);
+    color: var(--ink) !important;
+  }
+
+  /* Hero */
+  .castellari .hero {
+    padding: 115px 0 60px;
+  }
+
+  .castellari .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .castellari .hero-eyebrow {
+    gap: 9px;
+    margin-bottom: 20px;
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .castellari .hero-eyebrow .rule {
+    width: 24px;
+    flex-shrink: 0;
+  }
+
+  .castellari .hero h1 {
+    max-width: 100%;
+    font-size: clamp(38px, 10vw, 50px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+
+  .castellari .hero p.lead {
+    max-width: 100%;
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .castellari .hero-actions {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .castellari .hero-actions .btn {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 14px 18px;
+    font-size: 11px;
+  }
+
+  .castellari .hero-art {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+  }
+
+  /* Estatísticas */
+  .castellari .stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .castellari .stat {
+    padding: 20px 12px;
+  }
+
+  .castellari .stat .num {
+    font-size: 22px;
+  }
+
+  .castellari .stat .cap {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  /* Seções */
+  .castellari .section {
+    padding: 78px 0;
+  }
+
+  .castellari .section-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 46px;
+  }
+
+  .castellari .section-head h2 {
+    max-width: 100%;
+    font-size: clamp(32px, 8.5vw, 42px);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+  }
+
+  .castellari .section-head p {
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  /* Curadoria */
+  .castellari .castellari-curadoria {
+    padding-top: 78px;
+    padding-bottom: 85px;
+  }
+
+  .castellari .castellari-curadoria .section-head {
+    gap: 26px;
+    margin-bottom: 48px;
+  }
+
+  .castellari .castellari-curadoria .section-head h2 {
+    font-size: clamp(34px, 9vw, 44px);
+  }
+
+  .castellari .castellari-curadoria .section-head p {
+    max-width: 100%;
+    padding-left: 0;
+    font-size: 14px;
+  }
+
+  .castellari .curadoria-intro {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .castellari .curadoria-intro-number {
+    padding: 20px 0 0;
+  }
+
+  .castellari .curadoria-intro-number::after {
+    display: none;
+  }
+
+  .castellari .curadoria-intro-content {
+    padding: 30px 0 45px;
+  }
+
+  .castellari .curadoria-intro-content h3 {
+    max-width: 100%;
+    font-size: clamp(30px, 8.5vw, 38px);
+    line-height: 1.05;
+  }
+
+  .castellari .curadoria-intro-content p {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .castellari .curadoria-pillars {
+    grid-template-columns: 1fr;
+    margin-top: 55px;
+  }
+
+  .castellari .curadoria-pillar {
+    min-height: auto;
+    padding: 30px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .castellari .curadoria-pillar + .curadoria-pillar {
+    padding-left: 0;
+  }
+
+  .castellari .curadoria-pillar:last-child {
+    border-bottom: 0;
+  }
+
+  .castellari .curadoria-pillar h3 {
+    font-size: 29px;
+  }
+
+  .castellari .curadoria-pillar p {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .castellari .curadoria-quote {
+    margin-top: 55px;
+    padding: 58px 18px 46px;
+  }
+
+  .castellari .curadoria-quote p {
+    font-size: clamp(24px, 7vw, 30px);
+    line-height: 1.18;
+  }
+
+  /* Diferenciais */
+  .castellari .diff-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .castellari .diff-item {
+    padding: 28px 20px;
+  }
+
+  .castellari .diff-item h3 {
+    font-size: 20px;
+  }
+
+  .castellari .diff-item p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* Processo */
+  .castellari .process-item {
+    grid-template-columns: 42px 1fr;
+    gap: 14px;
+    padding: 24px 0;
+  }
+
+  .castellari .process-item h3 {
+    font-size: 20px;
+  }
+
+  .castellari .process-item p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* Depoimentos */
+  .castellari .testi-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .castellari .testi-card {
+    padding: 26px 20px;
+  }
+
+  .castellari .testi-card p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Contato */
+  .castellari .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .castellari .contact-info h2 {
+    max-width: 100%;
+    font-size: clamp(32px, 8.5vw, 42px);
+    line-height: 1.06;
+  }
+
+  .castellari .contact-info p {
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .castellari .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .castellari .form-submit {
+    width: 100%;
+    padding: 15px 20px;
+  }
+
+  /* Footer */
+  .castellari footer {
+    padding: 44px 0 24px;
+  }
+
+  .castellari .footer-top {
+    flex-direction: column;
+    gap: 32px;
+    padding-bottom: 30px;
+  }
+
+  .castellari .footer-links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .castellari .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 20px;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 390px) {
+
+  .castellari .wrap {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .castellari .brand {
+    font-size: 15px;
+    letter-spacing: 0.05em;
+  }
+
+  .castellari .brand .logo-castelo {
+    width: 29px;
+    height: 29px;
+  }
+
+  .castellari .hero {
+    padding-top: 108px;
+  }
+
+  .castellari .hero h1 {
+    font-size: clamp(36px, 10vw, 43px);
+  }
+
+  .castellari .hero p.lead {
+    font-size: 14px;
+  }
+
+  .castellari .section-head h2 {
+    font-size: clamp(30px, 8.8vw, 38px);
+  }
+
+  .castellari .castellari-curadoria .section-head h2 {
+    font-size: 35px;
+  }
+
+  .castellari .curadoria-intro-content h3 {
+    font-size: 31px;
+  }
+
+  .castellari .curadoria-quote p {
+    font-size: 25px;
+  }
+
+  .castellari .footer-links {
+    grid-template-columns: 1fr;
+  }
+}
+

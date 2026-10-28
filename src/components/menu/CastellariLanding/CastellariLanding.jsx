@@ -153,6 +153,7 @@ export default function CastellariLanding() {
   const rootRef = useReveal();
 
   const [scrolled, setScrolled] = useState(false);
+  const [menuAberto, setMenuAberto] = useState(false);
 
   const [formNote, setFormNote] = useState(
     "Você será redirecionado para o WhatsApp."
@@ -173,6 +174,18 @@ export default function CastellariLanding() {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuAberto ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuAberto]);
+
+  function fecharMenu() {
+    setMenuAberto(false);
+  }
 
   // ==========================================
   // FORMULÁRIO
@@ -215,11 +228,18 @@ export default function CastellariLanding() {
 
       {/* ================= NAV ================= */}
 
-      <header className={`nav${scrolled ? " scrolled" : ""}`}>
+      <header
+        className={`nav${scrolled ? " scrolled" : ""}${
+          menuAberto ? " menu-open" : ""
+        }`}
+      >
         <div className="wrap nav-inner">
 
-          <a href="#" className="brand">
-
+          <a
+            href="#"
+            className="brand"
+            onClick={fecharMenu}
+          >
             <svg
               className="logo-castelo"
               viewBox="0 0 100 100"
@@ -233,60 +253,66 @@ export default function CastellariLanding() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-
-                {/* Torre central */}
                 <path d="M35 82V28H65V82" />
-
-                {/* Torre esquerda */}
                 <path d="M10 82V43H35V82" />
-
-                {/* Torre direita */}
                 <path d="M65 43V82H90V43" />
-
-                {/* Ameias torre central */}
                 <path d="M35 28V21H42V28H50V21H58V28H65" />
-
-                {/* Ameias torre esquerda */}
                 <path d="M10 43V36H17V43H24V36H31V43H35" />
-
-                {/* Ameias torre direita */}
                 <path d="M65 43V36H72V43H79V36H86V43H90" />
-
-                {/* Porta */}
                 <path d="M44 82V67C44 61 48 57 50 57C52 57 56 61 56 67V82" />
-
-                {/* Janela */}
                 <path d="M47 45V40C47 37 53 37 53 40V45" />
-
-                {/* Bandeira */}
                 <path d="M50 21V9" />
                 <path d="M50 9H70L62 15L70 21H50" />
-
-                {/* Base */}
                 <path d="M6 82H94" />
-
               </g>
             </svg>
 
-            CASTELLARI IMÓVEIS
+            <span>CASTELLARI IMÓVEIS</span>
           </a>
 
           <nav className="nav-links">
-            <a href="#imoveis">Imóveis</a>
-            <a href="#diferenciais">Diferenciais</a>
-            <a href="#processo">Como funciona</a>
 
-            <a href="#contato" className="nav-cta">
+            <Link
+              to="/imoveis"
+              onClick={fecharMenu}
+            >
+              Imóveis
+            </Link>
+
+            <a
+              href="#diferenciais"
+              onClick={fecharMenu}
+            >
+              Diferenciais
+            </a>
+
+            <a
+              href="#processo"
+              onClick={fecharMenu}
+            >
+              Como funciona
+            </a>
+
+            <a
+              href="#contato"
+              className="nav-cta"
+              onClick={fecharMenu}
+            >
               Fale com um consultor
             </a>
+
           </nav>
 
           <button
-            className="nav-toggle"
-            aria-label="Menu"
+            className={`nav-toggle${menuAberto ? " active" : ""}`}
+            aria-label={menuAberto ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={menuAberto}
             type="button"
+            onClick={() => setMenuAberto(!menuAberto)}
           >
-            ☰
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
 
         </div>
@@ -1315,23 +1341,23 @@ export default function CastellariLanding() {
 
               <div className="footer-col">
 
-                <h4>
-                  Navegação
-                </h4>
+  <h4>
+    Navegação
+  </h4>
 
-                <a href="#imoveis">
-                  Imóveis
-                </a>
+  <Link to="/imoveis">
+    Imóveis
+  </Link>
 
-                <a href="#diferenciais">
-                  Diferenciais
-                </a>
+  <a href="#diferenciais">
+    Diferenciais
+  </a>
 
-                <a href="#processo">
-                  Como funciona
-                </a>
+  <a href="#processo">
+    Como funciona
+  </a>
 
-              </div>
+</div>
 
               <div className="footer-col">
 
